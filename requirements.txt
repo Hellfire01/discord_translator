@@ -1,0 +1,4 @@
+discord.py
+SQLAlchemy
+psycopg2
+googletrans==3.1.0a0

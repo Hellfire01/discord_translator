@@ -1,0 +1,1 @@
+write your discord token here ( and do not remove this file from the gitignore )
