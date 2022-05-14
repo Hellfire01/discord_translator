@@ -1,1 +1,1 @@
-put your token here without any carriage return / line breaks
+put your token here without any cariage return
