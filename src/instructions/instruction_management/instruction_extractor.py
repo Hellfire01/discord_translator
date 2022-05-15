@@ -1,3 +1,4 @@
+from src.instructions.instructions.instruction_parent import InstructionParent
 
 
 class InstructionExtractor:
@@ -17,7 +18,7 @@ class InstructionExtractor:
     def help_instruction(self):
         return self.instructions_references.help_instruction
 
-    def get_instruction(self, message):
+    def get_instruction(self, message: str) -> InstructionParent:
         clear_message = message.strip()
         if self.is_instruction(message):
             split_message = clear_message.split(' ')

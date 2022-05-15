@@ -8,13 +8,13 @@ class DiscordApi(discord.Client):
     async def on_message(self, message):
         if message.author == self.user:
             return  # ignore the bot itself to prevent feedback loop
-        instruction = None
         ret = ""
         if str(self.user.id) in message.content:
             instruction = self.instruction_extractor.help_instruction
         else:
             instruction = self.instruction_extractor.get_instruction(message.content)
         # self.database_interface.get_user(message.author.id)
+        print(message.channel.id)
         ret += instruction.run(message.content)
         if ret != "":
             await message.channel.send(ret)

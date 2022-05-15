@@ -20,5 +20,5 @@ class DatabaseInterface:
 
 
 # todo :
-# help => indicate a usage exemple more detailled ( something that could be copy / pasted )
-# use case where nothing to be translated was given => give ddicated error message
+# help => indicate a usage example more detailed ( something that could be copy / pasted )
+# use case where nothing to be translated was given => give dedicated error message
