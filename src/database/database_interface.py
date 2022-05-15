@@ -1,24 +1,32 @@
+from contextlib import contextmanager
+from src.database.database_commons import Session
 from src.database.database import Database
 
 
 # interfaces the Database class in order to wrap it
 class DatabaseInterface:
+    @contextmanager
+    def __get_session(self):
+        session = Session()
+        yield session
+        session.commit()
+        session.close()
+
     def __init__(self):
         self.database = Database()
 
     def get_user(self, user_id):
-        self.database.get_user(user_id)
+        with self.__get_session() as session:
+            self.database.get_user(user_id, session)
 
     def create_user(self, user_id):
-        self.database.create_user(user_id)
+        with self.__get_session() as session:
+            self.database.create_user(user_id, session)
 
-    def get_user_channel_combo(self, user, channel):
-        pass
+    def get_channel_preferences(self, channel_id):
+        with self.__get_session() as session:
+            return self.database.get_channel_preferences(session, channel_id)
 
     def set_user_channel_combo(self, user, channel, lang_in, lang_out):
-        pass
-
-
-# todo :
-# help => indicate a usage example more detailed ( something that could be copy / pasted )
-# use case where nothing to be translated was given => give dedicated error message
+        with self.__get_session() as session:
+            pass
