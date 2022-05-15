@@ -1,14 +1,14 @@
 from src.global_settings import GlobalSettings
 from src.instructions.enums.lang_enum import LangEnum
 from src.instructions.instructions.instruction_parent import InstructionParent
-from src.instructions.instructions.translate.translate_lang_instruction_extractor import TranslateLangInstructionExtractor
+from src.instructions.instructions.translate.translate_lang_extractor import TranslateLangExtractor
 from src.instructions.instructions.translate.google_translate_api import GoogleTranslateApi
 from src.exceptions.translate_exception import TranslateException
 
 
 class TranslateSubInstruction(InstructionParent):
     def __init__(self, translate_help_instruction, translate_lang_list_instruction):
-        self.extractor = TranslateLangInstructionExtractor(translate_help_instruction, translate_lang_list_instruction)
+        self.extractor = TranslateLangExtractor(translate_help_instruction, translate_lang_list_instruction)
         self.translate_lang_list_instruction = translate_lang_list_instruction
         self.translate_help_instruction = translate_help_instruction
         self.googleTranslateApi = GoogleTranslateApi()

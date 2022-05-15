@@ -3,7 +3,7 @@ from src.exceptions.translate_exception import TranslateException
 from src.instructions.enums.lang_enum import LangEnum
 
 
-class TranslateLangInstructionExtractor:
+class TranslateLangExtractor:
     def __init__(self, translate_help_instruction, translate_lang_list_instruction):
         self.translate_help_instruction = "Use " + translate_help_instruction + " for help / to see examples"
         self.translate_lang_list_instruction = "Use " + translate_lang_list_instruction + " to see the available languages"
