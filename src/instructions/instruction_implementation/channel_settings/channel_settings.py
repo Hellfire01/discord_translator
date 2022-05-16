@@ -6,6 +6,10 @@ from src.instructions.instruction_management.instruction_referencer import Instr
 from src.instructions.instruction_management.instruction_container import InstructionContainer
 from src.instructions.instruction_implementation.channel_settings.channel_settings_help import ChannelSettingsHelp
 from src.instructions.instruction_implementation.channel_settings.channel_settings_sub_instruction import ChannelSettingsSubInstruction
+from src.instructions.instruction_implementation.instruction_list import InstructionList
+from src.instructions.instruction_implementation.channel_settings.sub_settings.get import Get
+from src.instructions.instruction_implementation.channel_settings.sub_settings.set import Set
+from src.instructions.instruction_implementation.channel_settings.sub_settings.remove import Remove
 
 
 class ChannelSettings(InstructionParent):
@@ -20,7 +24,10 @@ class ChannelSettings(InstructionParent):
                                                        not_an_instruction=nai,
                                                        default_instruction=ChannelSettingsSubInstruction(channel_settings_help_instruc))
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], channel_settings_help))
-
+        instruction_referencer.add_instruction(InstructionContainer(["-s", "set", "--set"], Set()))
+        instruction_referencer.add_instruction(InstructionContainer(["-g", "get", "--get"], Get()))
+        instruction_referencer.add_instruction(InstructionContainer(["-r", "remove", "--remove"], Remove()))
+        instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list)))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
     def run(self, message) -> str:
