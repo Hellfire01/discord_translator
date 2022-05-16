@@ -1,8 +1,8 @@
 from src.global_settings import GlobalSettings
 from src.instructions.enums.lang_enum import LangEnum
-from src.instructions.instructions.instruction_parent import InstructionParent
-from src.instructions.instructions.translate.translate_lang_extractor import TranslateLangExtractor
-from src.instructions.instructions.translate.google_translate_api import GoogleTranslateApi
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.translate.translate_lang_extractor import TranslateLangExtractor
+from src.instructions.instruction_implementation.translate.google_translate_api import GoogleTranslateApi
 from src.exceptions.translate_exception import TranslateException
 
 

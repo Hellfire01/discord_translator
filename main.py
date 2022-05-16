@@ -4,11 +4,11 @@ from src.database.database_interface import DatabaseInterface
 from src.instructions.instruction_management.instruction_extractor import InstructionExtractor
 from src.instructions.instruction_management.instruction_referencer import InstructionReferencer
 from src.instructions.instruction_management.instruction_container import InstructionContainer
-from src.instructions.instructions.help import Help
-from src.instructions.instructions.translate.translate import Translate
-from src.instructions.instructions.channel_settings.channel_settings import ChannelSettings
-from src.instructions.instructions.instruction_list import InstructionList
-from src.instructions.instructions.list_languages import ListLanguages
+from src.instructions.instruction_implementation.help import Help
+from src.instructions.instruction_implementation.translate.translate import Translate
+from src.instructions.instruction_implementation.channel_settings.channel_settings import ChannelSettings
+from src.instructions.instruction_implementation.instruction_list import InstructionList
+from src.instructions.instruction_implementation.list_languages import ListLanguages
 
 
 def get_instructions(keyword):

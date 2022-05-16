@@ -1,5 +1,5 @@
 from src.global_settings import GlobalSettings
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class TranslateHelp(InstructionParent):
@@ -29,4 +29,4 @@ class TranslateHelp(InstructionParent):
         return ret
 
     def get_description(self) -> str:
-        return "this instructions shows you how to use the `translate` option"
+        return "this instruction_implementation shows you how to use the `translate` option"

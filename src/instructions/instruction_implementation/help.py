@@ -1,5 +1,5 @@
 from src.global_settings import GlobalSettings
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class Help(InstructionParent):
@@ -14,7 +14,7 @@ class Help(InstructionParent):
         ret += "\n"
         ret += "Here is how to use me :\n"
         ret += "\n"
-        ret += "you can get the list of instructions by writing `" + GlobalSettings.get_instance().instruction_keyword[0] + " -l`"
+        ret += "you can get the list of instruction_implementation by writing `" + GlobalSettings.get_instance().instruction_keyword[0] + " -l`"
         return ret
 
     def get_description(self):

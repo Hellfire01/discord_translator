@@ -1,9 +1,9 @@
-from src.instructions.instructions.help import Help
-from src.instructions.instructions.not_an_instruction import NotAnInstruction
-from src.instructions.instructions.no_instruction import NoInstruction
+from src.instructions.instruction_implementation.help import Help
+from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
+from src.instructions.instruction_implementation.no_instruction import NoInstruction
 
 
-# dataclass that references the complete list of all the instructions
+# dataclass that references the complete list of all the instruction_implementation
 class InstructionReferencer:
     def __init__(self, help_instruction=None, no_instruction=None, not_an_instruction=None, default_instruction=None):
         self.no_instruction = NoInstruction() if no_instruction is None else no_instruction

@@ -1,4 +1,4 @@
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class InstructionExtractor:
@@ -39,7 +39,7 @@ class InstructionExtractor:
 
 # create a sub parser for the sub instruction menus
 # the parser needs to send the message with the instruction keyword + instruction command removed
-# instructions todo :
+# instruction_implementation todo :
 #   channel
 #     check ( status of current channel )
 #     list ( on this discord )

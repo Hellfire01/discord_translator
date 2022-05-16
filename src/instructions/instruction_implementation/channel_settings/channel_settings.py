@@ -1,11 +1,11 @@
 from src.global_settings import GlobalSettings
-from src.instructions.instructions.instruction_parent import InstructionParent
-from src.instructions.instructions.not_an_instruction import NotAnInstruction
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
 from src.instructions.instruction_management.sub_instruction_extractor import SubInstructionExtractor
 from src.instructions.instruction_management.instruction_referencer import InstructionReferencer
 from src.instructions.instruction_management.instruction_container import InstructionContainer
-from src.instructions.instructions.channel_settings.channel_settings_help import ChannelSettingsHelp
-from src.instructions.instructions.channel_settings.channel_settings_sub_instruction import ChannelSettingsSubInstruction
+from src.instructions.instruction_implementation.channel_settings.channel_settings_help import ChannelSettingsHelp
+from src.instructions.instruction_implementation.channel_settings.channel_settings_sub_instruction import ChannelSettingsSubInstruction
 
 
 class ChannelSettings(InstructionParent):
@@ -20,6 +20,7 @@ class ChannelSettings(InstructionParent):
                                                        not_an_instruction=nai,
                                                        default_instruction=ChannelSettingsSubInstruction(channel_settings_help_instruc))
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], channel_settings_help))
+
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
     def run(self, message) -> str:

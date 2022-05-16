@@ -1,4 +1,4 @@
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class NoInstruction(InstructionParent):

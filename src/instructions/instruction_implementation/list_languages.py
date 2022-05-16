@@ -1,5 +1,5 @@
 from src.instructions.enums.lang_enum import LangEnum
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class ListLanguages(InstructionParent):

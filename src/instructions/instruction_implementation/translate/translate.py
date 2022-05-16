@@ -1,11 +1,11 @@
 from src.global_settings import GlobalSettings
-from src.instructions.instructions.instruction_parent import InstructionParent
-from src.instructions.instructions.not_an_instruction import NotAnInstruction
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
 from src.instructions.instruction_management.sub_instruction_extractor import SubInstructionExtractor
 from src.instructions.instruction_management.instruction_referencer import InstructionReferencer
 from src.instructions.instruction_management.instruction_container import InstructionContainer
-from src.instructions.instructions.translate.translate_help import TranslateHelp
-from src.instructions.instructions.translate.translate_sub_instruction import TranslateSubInstruction
+from src.instructions.instruction_implementation.translate.translate_help import TranslateHelp
+from src.instructions.instruction_implementation.translate.translate_sub_instruction import TranslateSubInstruction
 
 
 class Translate(InstructionParent):

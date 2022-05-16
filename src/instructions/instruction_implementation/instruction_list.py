@@ -1,4 +1,4 @@
-from src.instructions.instructions.instruction_parent import InstructionParent
+from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class InstructionList(InstructionParent):
@@ -21,7 +21,7 @@ class InstructionList(InstructionParent):
     def run(self, message) -> str:
         ret = ""
         instructions, nk_instructions = self.get_instruction_list()
-        ret += "list of instructions :\n"
+        ret += "list of instruction_implementation :\n"
         instructions.sort()
         for instruction in instructions:
             ret += "\n"
@@ -33,4 +33,4 @@ class InstructionList(InstructionParent):
         return ret
 
     def get_description(self):
-        return "displays a complete list of all of the available instructions and how to use them"
+        return "displays a complete list of all of the available instruction_implementation and how to use them"
