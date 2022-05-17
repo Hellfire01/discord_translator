@@ -27,7 +27,7 @@ class ChannelSettings(InstructionParent):
         instruction_referencer.add_instruction(InstructionContainer(["-s", "set", "--set"], Set()))
         instruction_referencer.add_instruction(InstructionContainer(["-g", "get", "--get"], Get()))
         instruction_referencer.add_instruction(InstructionContainer(["-r", "remove", "--remove"], Remove()))
-        instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list)))
+        instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list, "Channel settings ")))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
     def run(self, message) -> str:

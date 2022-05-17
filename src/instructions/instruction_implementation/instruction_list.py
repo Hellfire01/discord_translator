@@ -2,9 +2,10 @@ from src.instructions.instruction_implementation.instruction_parent import Instr
 
 
 class InstructionList(InstructionParent):
-    def __init__(self, get_instruction_list):
+    def __init__(self, get_instruction_list, sub_instruction_string=""):
         self.get_instruction_list = get_instruction_list
-        super(InstructionList, self).__init__("Instruction list")
+        self.sub_instruction_string = sub_instruction_string
+        super(InstructionList, self).__init__(sub_instruction_string + "Instruction list")
 
     def __present_keywords(self, keywords) -> str:
         ret = ""
@@ -21,11 +22,11 @@ class InstructionList(InstructionParent):
     def run(self, message) -> str:
         ret = ""
         instructions, nk_instructions = self.get_instruction_list()
-        ret += "list of instruction_implementation :\n"
+        ret += "list of possible instructions :\n"
         instructions.sort()
         for instruction in instructions:
             ret += "\n"
-            ret += "`" + instruction.reference.instruction_name + "` => can be called with :"
+            ret += "**" + instruction.reference.instruction_name + "** => can be called with :"
             ret += " " + self.__present_keywords(instruction.keywords) + "\n"
             ret += instruction.reference.get_description() + "\n"
         for nk_instruction in nk_instructions:

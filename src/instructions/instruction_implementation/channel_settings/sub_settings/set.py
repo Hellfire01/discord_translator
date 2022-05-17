@@ -3,7 +3,7 @@ from src.instructions.instruction_implementation.instruction_parent import Instr
 
 class Set(InstructionParent):
     def __init__(self):
-        super(Set, self).__init__("Channel settings set")
+        super(Set, self).__init__("Channel settings Set")
 
     def run(self, message):
         return "channel settings set todo"
