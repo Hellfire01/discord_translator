@@ -6,7 +6,7 @@ from src.instructions.instruction_management.instruction_referencer import Instr
 from src.instructions.instruction_management.instruction_container import InstructionContainer
 from src.instructions.instruction_implementation.help import Help
 from src.instructions.instruction_implementation.translate.translate import Translate
-from src.instructions.instruction_implementation.channel_settings.channel_settings import ChannelSettings
+from src.instructions.instruction_implementation.auto_translation.auto_translation import AutoTranslation
 from src.instructions.instruction_implementation.instruction_list import InstructionList
 from src.instructions.instruction_implementation.list_languages import ListLanguages
 
@@ -14,7 +14,7 @@ from src.instructions.instruction_implementation.list_languages import ListLangu
 def get_instructions(keyword):
     instruction_referencer = InstructionReferencer(help_instruction=help_instruction)
     instruction_referencer.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate()))
-    instruction_referencer.add_instruction(InstructionContainer(["-cs", "channel-settings", "--channel-settings"], ChannelSettings()))
+    instruction_referencer.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
     instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
     instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list)))
     instruction_referencer.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))

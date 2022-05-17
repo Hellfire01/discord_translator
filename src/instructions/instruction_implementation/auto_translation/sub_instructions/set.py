@@ -3,10 +3,10 @@ from src.instructions.instruction_implementation.instruction_parent import Instr
 
 class Set(InstructionParent):
     def __init__(self):
-        super(Set, self).__init__("Channel settings Set")
+        super(Set, self).__init__("Auto translation Set")
 
     def run(self, message):
-        return "channel settings set todo"
+        return "Auto translation set todo"
 
     def get_description(self) -> str:
-        return "channel settings set description todo"
+        return "Auto translation set description todo"
