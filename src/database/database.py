@@ -1,8 +1,6 @@
 from src.database.models.user_model import UserModel
 from src.database.models.lang_model import LangModel
 from src.database.models.channel_model import ChannelModel
-from src.database.models.user_preference_model import UserPreferenceModel
-from src.database.models.channel_preference_model import ChannelPreferenceModel
 from src.database.database_commons import Base, Engine
 
 
