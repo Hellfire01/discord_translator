@@ -1,4 +1,4 @@
-from src.global_settings import GlobalSettings
+from src.core_module.config import Config
 from src.exceptions.translate_exception import TranslateException
 from src.instructions.enums.lang_enum import LangEnum
 
@@ -9,9 +9,9 @@ class TranslateLangExtractor:
         self.translate_lang_list_instruction = "Use " + translate_lang_list_instruction + " to see the available languages"
 
     def __check_for_separator(self, message):
-        s_message = message.split(GlobalSettings.get_instance().translate_splitter)
+        s_message = message.split(Config.get_instance().translate_splitter)
         if len(s_message) < 2:
-            message = "I could not find the separator `" + GlobalSettings.get_instance().translate_splitter + "`"
+            message = "I could not find the separator `" + Config.get_instance().translate_splitter + "`"
             message += " that I need to know what to translate into what.\n"
             message += self.translate_help_instruction
             raise TranslateException(message)

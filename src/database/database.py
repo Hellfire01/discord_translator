@@ -1,5 +1,4 @@
 from src.database.models.user_model import UserModel
-from src.database.models.lang_model import LangModel
 from src.database.models.channel_model import ChannelModel
 from src.database.database_commons import Base, Engine
 
@@ -33,21 +32,9 @@ class Database:
             channel = ChannelModel(channel_discord_id=discord_id)
             session.add(channel)
 
+    def update_channel(self, session, discord_id, langs):
+        channel = self.get_channel(discord_id, session)
+        channel.lang_string_instruction = langs
+
     def get_channels(self, session):
         return session.query(ChannelModel).all()
-
-    # ==== channel preferences ====
-
-    def get_channel_preferences(self, session, channel_id):
-        return
-
-    # ==== languages ====
-
-    def get_langs(self, session):
-        return session.query(LangModel).all()
-
-    def get_lang(self, session, name):
-        return None
-
-    def set_lang(self, lang_enum):
-        pass

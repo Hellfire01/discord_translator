@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 
-class GlobalSettings:
+class Config:
     __instance = None
 
     def __init__(self):
@@ -27,6 +27,6 @@ class GlobalSettings:
 
     @staticmethod
     def get_instance():
-        if GlobalSettings.__instance is None:
-            GlobalSettings.__instance = GlobalSettings()
-        return GlobalSettings.__instance
+        if Config.__instance is None:
+            Config.__instance = Config()
+        return Config.__instance

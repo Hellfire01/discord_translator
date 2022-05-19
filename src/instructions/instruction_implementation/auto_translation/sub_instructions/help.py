@@ -1,4 +1,3 @@
-from src.global_settings import GlobalSettings
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 

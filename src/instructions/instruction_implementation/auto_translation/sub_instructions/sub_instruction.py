@@ -1,4 +1,4 @@
-from src.global_settings import GlobalSettings
+from src.core_module.config import Config
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
@@ -12,5 +12,5 @@ class SubInstruction(InstructionParent):
         return ret
 
     def get_description(self):
-        return "use `" + GlobalSettings.get_instance().instruction_keyword[0] + " auto-translation help` in order to" \
+        return "use `" + Config.get_instance().instruction_keyword[0] + " auto-translation help` in order to" \
                                                                                 "know how to use this instruction"

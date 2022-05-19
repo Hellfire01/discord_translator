@@ -1,4 +1,4 @@
-from src.global_settings import GlobalSettings
+from src.core_module.config import Config
 from src.instructions.enums.lang_enum import LangEnum
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 from src.instructions.instruction_implementation.translate.translate_lang_extractor import TranslateLangExtractor
@@ -39,5 +39,5 @@ class TranslateSubInstruction(InstructionParent):
         return ret
 
     def get_description(self):
-        return "use `" + GlobalSettings.get_instance().instruction_keyword[0] + " translate help` in order to know " \
+        return "use `" + Config.get_instance().instruction_keyword[0] + " translate help` in order to know " \
                "how to use this instruction"

@@ -1,5 +1,5 @@
 from src.discord_api import DiscordApi
-from src.global_settings import GlobalSettings
+from src.core_module.config import Config
 from src.database.database_interface import DatabaseInterface
 from src.instructions.instruction_management.instruction_extractor import InstructionExtractor
 from src.instructions.instruction_management.instruction_referencer import InstructionReferencer
@@ -21,7 +21,7 @@ def get_instructions(keyword):
     return InstructionExtractor(keyword, instruction_referencer)
 
 
-global_settings = GlobalSettings.get_instance()
+global_settings = Config.get_instance()
 global_settings.set_values(instruction_keyword=["!ot", "ouro-translator"],
                            discord_token_filename='discord_token.txt',
                            translate_splitter="=>")

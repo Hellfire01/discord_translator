@@ -1,4 +1,4 @@
-from src.global_settings import GlobalSettings
+from src.core_module.config import Config
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
 from src.instructions.instruction_management.sub_instruction_extractor import SubInstructionExtractor
@@ -11,11 +11,11 @@ from src.instructions.instruction_implementation.translate.translate_sub_instruc
 class Translate(InstructionParent):
     def __init__(self):
         super(Translate, self).__init__("Translate")
-        trans_help_instruc = "`" + GlobalSettings.get_instance().instruction_keyword[0] + " translate help`"
-        trans_lang_list_instruc = "`" + GlobalSettings.get_instance().instruction_keyword[0] + " lang-list`"
+        trans_help_instruc = "`" + Config.get_instance().instruction_keyword[0] + " translate help`"
+        trans_lang_list_instruc = "`" + Config.get_instance().instruction_keyword[0] + " lang-list`"
         translate_help = TranslateHelp()
         nai = NotAnInstruction("The `translate` instruction needs arguments in order to work\nUse `" +
-                               GlobalSettings.get_instance().instruction_keyword[0] + " translate help`"
+                               Config.get_instance().instruction_keyword[0] + " translate help`"
                                " to see how to use this option")
         instruction_referencer = InstructionReferencer(help_instruction=translate_help,
                                                        not_an_instruction=nai,
@@ -31,5 +31,5 @@ class Translate(InstructionParent):
 
     def get_description(self):
         ret = "this instruction is used for a manual translation\n"
-        ret += "in order to use get ore information on this instruction, use `" + GlobalSettings.get_instance().instruction_keyword[0] + " translate help`"
+        ret += "in order to use get ore information on this instruction, use `" + Config.get_instance().instruction_keyword[0] + " translate help`"
         return ret
