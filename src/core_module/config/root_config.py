@@ -1,32 +1,24 @@
-import os
-from pathlib import Path
 
 
-class Config:
-    __instance = None
+class RootConfig:
+    def __init__(self, command_line_config, database_config, discord_config, translate_config):
+        self.__command_line_config = command_line_config
+        self.__database_config = database_config
+        self.__discord_config = discord_config
+        self.__translate_config = translate_config
 
-    def __init__(self):
-        self.instruction_keyword = None
-        self.discord_token = None
-        self.translate_splitter = None
+    @property
+    def command_line_config(self):
+        return self.__command_line_config
 
-    def __get_discord_token(self, filename) -> str:
-        file_path = Path(os.getcwd()) / filename
-        try:
-            with open(file_path) as file:
-                token = file.readline()
-        except FileNotFoundError:
-            print("could not find the needed token file " + str(file_path))
-            exit(1)
-        return token
+    @property
+    def database_config(self):
+        return self.__database_config
 
-    def set_values(self, instruction_keyword, discord_token_filename, translate_splitter):
-        self.instruction_keyword = instruction_keyword
-        self.discord_token = self.__get_discord_token(discord_token_filename)
-        self.translate_splitter = translate_splitter
+    @property
+    def discord_config(self):
+        return self.__discord_config
 
-    @staticmethod
-    def get_instance():
-        if Config.__instance is None:
-            Config.__instance = Config()
-        return Config.__instance
+    @property
+    def translate_config(self):
+        return self.__translate_config
