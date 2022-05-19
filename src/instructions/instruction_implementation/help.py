@@ -1,9 +1,9 @@
-from src.core_module.config import Config
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class Help(InstructionParent):
-    def __init__(self):
+    def __init__(self, keyword):
+        self.keyword = keyword
         super(Help, self).__init__("Help")
 
     def run(self, message=None) -> str:
@@ -14,7 +14,7 @@ class Help(InstructionParent):
         ret += "\n"
         ret += "Here is how to use me :\n"
         ret += "\n"
-        ret += "you can get the list of instruction_implementation by writing `" + Config.get_instance().instruction_keyword[0] + " -l`"
+        ret += "you can get the list of instruction_implementation by writing `" + self.keyword + " -l`"
         return ret
 
     def get_description(self):
