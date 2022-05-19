@@ -22,7 +22,7 @@ class DiscordApi(discord.Client):
     async def on_message_edit(self, before, after):
         pass
 
-    def __init__(self, database, instruction_extractor, *args, **kwargs):
+    def __init__(self, core, *args, **kwargs):
         self.database_interface = database
         self.instruction_extractor = instruction_extractor
         super().__init__(*args, **kwargs)

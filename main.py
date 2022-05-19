@@ -1,6 +1,11 @@
 from src.discord_api import DiscordApi
-from src.core_module.config import Config
+from src.core_module import Core
+from src.core_module.config.command_line_config import CommandLineConfig
+from src.core_module.config.database_config import DatabaseConfig
+from src.core_module.config.discord_config import DiscordConfig
+from src.core_module.config.translate_config import TranslateConfig
 from src.database.database_interface import DatabaseInterface
+from src.utils.get_discord_token import GetDiscordToken
 from src.instructions.instruction_management.instruction_extractor import InstructionExtractor
 from src.instructions.instruction_management.instruction_referencer import InstructionReferencer
 from src.instructions.instruction_management.instruction_container import InstructionContainer
@@ -11,7 +16,17 @@ from src.instructions.instruction_implementation.instruction_list import Instruc
 from src.instructions.instruction_implementation.list_languages import ListLanguages
 
 
+def get_core() -> Core:
+    commandline_config = CommandLineConfig(["!ot", "ouro-translator"])
+    database_config = DatabaseConfig(DatabaseInterface())
+    discord_config = DiscordConfig(GetDiscordToken.get_discord_token('discord_token.txt'))
+    translate_config = TranslateConfig("=>")
+    ret = Core(commandline_config, database_config, discord_config, translate_config)
+    return ret
+
+
 def get_instructions(keyword):
+    help_instruction = Help()
     instruction_referencer = InstructionReferencer(help_instruction=help_instruction)
     instruction_referencer.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate()))
     instruction_referencer.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
@@ -21,11 +36,7 @@ def get_instructions(keyword):
     return InstructionExtractor(keyword, instruction_referencer)
 
 
-global_settings = Config.get_instance()
-global_settings.set_values(instruction_keyword=["!ot", "ouro-translator"],
-                           discord_token_filename='discord_token.txt',
-                           translate_splitter="=>")
-database_interface = DatabaseInterface()
-help_instruction = Help()
-discord_api = DiscordApi(database_interface, get_instructions(global_settings.instruction_keyword))
-discord_api.run(global_settings.discord_token)
+core = get_core()
+instructions = get_instructions(core.command_line_config.keywords)
+discord_api = DiscordApi(core)
+discord_api.run()
