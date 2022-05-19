@@ -3,7 +3,12 @@ import logging
 
 class Logger:
     def __init__(self, output_file):
-        logging.basicConfig(filename=output_file, encoding='utf-8', level=logging.DEBUG)
+        self.__output_file = output_file
+        logging.basicConfig(filename=output_file, level=logging.DEBUG, format='%(asctime)s - %(levelname) - %(message)s')
+
+    @property
+    def output_file(self):
+        return self.__output_file
 
     # Confirmation that things are working as expected.
     def info(self, message):
