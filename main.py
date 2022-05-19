@@ -38,5 +38,5 @@ def get_instructions(keyword):
 
 core = get_core()
 instructions = get_instructions(core.command_line_config.keywords)
-discord_api = DiscordApi(core)
+discord_api = DiscordApi(core, instructions)
 discord_api.run()

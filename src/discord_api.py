@@ -10,9 +10,9 @@ class DiscordApi(discord.Client):
             return  # ignore the bot itself to prevent feedback loop
         ret = ""
         if str(self.user.id) in message.content:
-            instruction = self.instruction_extractor.help_instruction
+            instruction = self.instructions_extractor.help_instruction
         else:
-            instruction = self.instruction_extractor.get_instruction(message.content)
+            instruction = self.instructions_extractor.get_instruction(message.content)
         # self.database_interface.get_user(message.author.id)
         print(message.channel.id)
         ret += instruction.run(message.content)
@@ -22,7 +22,7 @@ class DiscordApi(discord.Client):
     async def on_message_edit(self, before, after):
         pass
 
-    def __init__(self, core, *args, **kwargs):
-        self.database_interface = database
-        self.instruction_extractor = instruction_extractor
+    def __init__(self, core, instructions_extractor, *args, **kwargs):
+        self.core = core
+        self.instructions_extractor = instructions_extractor
         super().__init__(*args, **kwargs)
