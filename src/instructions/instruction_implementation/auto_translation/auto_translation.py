@@ -37,5 +37,5 @@ class AutoTranslation(InstructionParent):
 
     def get_description(self):
         ret = "this instruction is used in order to set up automated translation for a channel\n"
-        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword+ " channel-settings help`"
+        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword + " channel-settings help`"
         return ret

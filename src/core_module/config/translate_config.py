@@ -6,4 +6,4 @@ class TranslateConfig:
 
     @property
     def separator(self):
-        return self.separator
+        return self.__separator
