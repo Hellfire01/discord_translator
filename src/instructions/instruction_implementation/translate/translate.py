@@ -1,4 +1,3 @@
-from src.core_module.config import Config
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
 from src.instructions.instruction_management.sub_instruction_extractor import SubInstructionExtractor
@@ -9,17 +8,17 @@ from src.instructions.instruction_implementation.translate.translate_sub_instruc
 
 
 class Translate(InstructionParent):
-    def __init__(self):
+    def __init__(self, commandline_config, translate_config):
+        self.commandline_config = commandline_config
+        self.translate_config = translate_config
         super(Translate, self).__init__("Translate")
-        trans_help_instruc = "`" + Config.get_instance().instruction_keyword[0] + " translate help`"
-        trans_lang_list_instruc = "`" + Config.get_instance().instruction_keyword[0] + " lang-list`"
+        trans_help_instruc = "`" + self.commandline_config.first_keyword + " translate help`"
+        trans_lang_list_instruc = "`" + self.commandline_config.first_keyword + " lang-list`"
         translate_help = TranslateHelp()
-        nai = NotAnInstruction("The `translate` instruction needs arguments in order to work\nUse `" +
-                               Config.get_instance().instruction_keyword[0] + " translate help`"
-                               " to see how to use this option")
-        instruction_referencer = InstructionReferencer(help_instruction=translate_help,
-                                                       not_an_instruction=nai,
-                                                       default_instruction=TranslateSubInstruction(trans_help_instruc, trans_lang_list_instruc))
+        nai_string = "The `translate` instruction needs arguments in order to work\nUse `" + self.commandline_config.first_keyword + " translate help` to see how to use this option"
+        nai = NotAnInstruction(nai_string)
+        translate_si = TranslateSubInstruction(commandline_config, translate_config, trans_help_instruc, trans_lang_list_instruc)
+        instruction_referencer = InstructionReferencer(help_instruction=translate_help, not_an_instruction=nai, default_instruction=translate_si)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], translate_help))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
@@ -31,5 +30,5 @@ class Translate(InstructionParent):
 
     def get_description(self):
         ret = "this instruction is used for a manual translation\n"
-        ret += "in order to use get ore information on this instruction, use `" + Config.get_instance().instruction_keyword[0] + " translate help`"
+        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword + " translate help`"
         return ret

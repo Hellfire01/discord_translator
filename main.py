@@ -27,15 +27,15 @@ def get_core() -> Core:
     return ret
 
 
-def get_instructions(core):
-    help_instruction = Help(core.command_line_config.first_keyword)
-    instruction_referencer = InstructionReferencer(help_instruction=help_instruction)
-    instruction_referencer.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate()))
-    instruction_referencer.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
-    instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
-    instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list)))
-    instruction_referencer.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))
-    return InstructionExtractor(core.command_line_config.keywords, instruction_referencer)
+def get_instructions(core_):
+    help_instruction = Help(core_.command_line_config.first_keyword)
+    ir = InstructionReferencer(help_instruction=help_instruction)
+    ir.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate(core_.commandline_config, core_.translate_config)))
+    ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
+    ir.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
+    ir.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(ir.get_instruction_list)))
+    ir.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))
+    return InstructionExtractor(core_.command_line_config.keywords, ir)
 
 
 core = get_core()

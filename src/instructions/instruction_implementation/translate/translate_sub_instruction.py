@@ -1,4 +1,3 @@
-from src.core_module.config import Config
 from src.instructions.enums.lang_enum import LangEnum
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 from src.instructions.instruction_implementation.translate.translate_lang_extractor import TranslateLangExtractor
@@ -7,7 +6,9 @@ from src.exceptions.translate_exception import TranslateException
 
 
 class TranslateSubInstruction(InstructionParent):
-    def __init__(self, translate_help_instruction, translate_lang_list_instruction):
+    def __init__(self, commandline_config, translate_config, translate_help_instruction, translate_lang_list_instruction):
+        self.commandline_config = commandline_config
+        self.translate_config = translate_config
         self.extractor = TranslateLangExtractor(translate_help_instruction, translate_lang_list_instruction)
         self.translate_lang_list_instruction = translate_lang_list_instruction
         self.translate_help_instruction = translate_help_instruction
@@ -39,5 +40,5 @@ class TranslateSubInstruction(InstructionParent):
         return ret
 
     def get_description(self):
-        return "use `" + Config.get_instance().instruction_keyword[0] + " translate help` in order to know " \
+        return "use `" + self.commandline_config.first_keyword + " translate help` in order to know " \
                "how to use this instruction"
