@@ -8,7 +8,12 @@ class Set(InstructionParent):
     def run(self, message):
         split_message = message.strip().split(" ")[1:]
         if len(split_message) == 0:
-            return "This instruction requires at least one langua"
+            return "This instruction requires at least one language given as parameter"
+        # are given parameter languages ?
+        # remove language duplicates
+        # is channel already in database ?
+        # if yes overwrite existing auto translation and say so
+        # if no, set auto translation and recap instruction
         return "Auto translation set todo"
 
     def get_description(self) -> str:
