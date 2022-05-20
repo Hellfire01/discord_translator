@@ -31,14 +31,14 @@ def get_instructions(core):
     help_instruction = Help(core.commandline_config.first_keyword)
     ir = InstructionReferencer(core.commandline_config, help_instruction=help_instruction)
     ir.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate(core.commandline_config, core.translate_config)))
-    ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
+    ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation(core.commandline_config)))
     ir.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
     ir.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(ir.get_instruction_list)))
     ir.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))
-    return InstructionExtractor(core.command_line_config.keywords, ir)
+    return InstructionExtractor(core.commandline_config.keywords, ir)
 
 
 core_instance = get_core()
 instructions = get_instructions(core_instance)
 discord_api = DiscordApi(core_instance, instructions)
-discord_api.run()
+discord_api.run(core_instance.discord_config.discord_token)

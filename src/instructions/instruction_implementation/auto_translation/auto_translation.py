@@ -15,15 +15,14 @@ class AutoTranslation(InstructionParent):
     def __init__(self, commandline_config):
         self.commandline_config = commandline_config
         super(AutoTranslation, self).__init__("Auto Translation")
-        channel_settings_help_instruc = "`" + self.commandline_config.first_keyword+ " auto translation help`"
-        channel_settings_help = Help()
+        auto_translation_help_instruc = "`" + self.commandline_config.first_keyword+ " auto translation help`"
+        auto_translation_help = Help()
         nai = NotAnInstruction("The `auto-translation` instruction needs arguments in order to work\nUse `" +
                                self.commandline_config.first_keyword+ " auto-translation help`"
                                " to see how to use this option")
-        instruction_referencer = InstructionReferencer(help_instruction=channel_settings_help,
-                                                       not_an_instruction=nai,
-                                                       default_instruction=SubInstruction(channel_settings_help_instruc))
-        instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], channel_settings_help))
+        sub_instruction = SubInstruction(commandline_config, auto_translation_help_instruc)
+        instruction_referencer = InstructionReferencer(commandline_config, auto_translation_help, not_an_instruction=nai, default_instruction=sub_instruction)
+        instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], auto_translation_help))
         instruction_referencer.add_instruction(InstructionContainer(["-s", "set", "--set"], Set()))
         instruction_referencer.add_instruction(InstructionContainer(["-g", "get", "--get"], Get()))
         instruction_referencer.add_instruction(InstructionContainer(["-r", "remove", "--remove"], Remove()))

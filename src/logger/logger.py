@@ -4,7 +4,9 @@ import logging
 class Logger:
     def __init__(self, output_file):
         self.__output_file = output_file
-        logging.basicConfig(filename=output_file, level=logging.DEBUG, format='%(asctime)s - %(levelname) - %(message)s')
+        logging.basicConfig(filename=output_file,
+                            level=logging.DEBUG,
+                            format='%(asctime)s %(levelname)s %(message)s')
 
     @property
     def output_file(self):

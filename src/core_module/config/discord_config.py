@@ -1,9 +1,9 @@
 
 
 class DiscordConfig:
-    def __init__(self, file_path):
-        self.__discord_token = None
+    def __init__(self, token):
+        self.__discord_token = token
 
     @property
     def discord_token(self):
-        return self.discord_token
+        return self.__discord_token
