@@ -17,9 +17,8 @@ class AutoTranslation(InstructionParent):
         super(AutoTranslation, self).__init__("Auto Translation")
         auto_translation_help_instruc = "`" + self.commandline_config.first_keyword+ " auto translation help`"
         auto_translation_help = Help()
-        nai = NotAnInstruction("The `auto-translation` instruction needs arguments in order to work\nUse `" +
-                               self.commandline_config.first_keyword+ " auto-translation help`"
-                               " to see how to use this option")
+        nai = NotAnInstruction(commandline_config, "The `auto-translation` instruction needs arguments in order to work\nUse `" +
+                               self.commandline_config.first_keyword+ " auto-translation help` to see how to use this option")
         sub_instruction = SubInstruction(commandline_config, auto_translation_help_instruc)
         instruction_referencer = InstructionReferencer(commandline_config, auto_translation_help, not_an_instruction=nai, default_instruction=sub_instruction)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], auto_translation_help))
