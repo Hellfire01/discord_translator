@@ -1,4 +1,3 @@
-from src.core_module.config import Config
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
 from src.instructions.instruction_management.sub_instruction_extractor import SubInstructionExtractor
@@ -13,12 +12,13 @@ from src.instructions.instruction_implementation.auto_translation.sub_instructio
 
 
 class AutoTranslation(InstructionParent):
-    def __init__(self):
+    def __init__(self, commandline_config):
+        self.commandline_config = commandline_config
         super(AutoTranslation, self).__init__("Auto Translation")
-        channel_settings_help_instruc = "`" + Config.get_instance().instruction_keyword[0] + " auto translation help`"
+        channel_settings_help_instruc = "`" + self.commandline_config.first_keyword+ " auto translation help`"
         channel_settings_help = Help()
         nai = NotAnInstruction("The `auto-translation` instruction needs arguments in order to work\nUse `" +
-                               Config.get_instance().instruction_keyword[0] + " auto-translation help`"
+                               self.commandline_config.first_keyword+ " auto-translation help`"
                                " to see how to use this option")
         instruction_referencer = InstructionReferencer(help_instruction=channel_settings_help,
                                                        not_an_instruction=nai,
@@ -38,5 +38,5 @@ class AutoTranslation(InstructionParent):
 
     def get_description(self):
         ret = "this instruction is used in order to set up automated translation for a channel\n"
-        ret += "in order to use get ore information on this instruction, use `" + Config.get_instance().instruction_keyword[0] + " channel-settings help`"
+        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword+ " channel-settings help`"
         return ret

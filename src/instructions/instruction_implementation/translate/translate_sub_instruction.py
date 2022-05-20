@@ -9,7 +9,7 @@ class TranslateSubInstruction(InstructionParent):
     def __init__(self, commandline_config, translate_config, translate_help_instruction, translate_lang_list_instruction):
         self.commandline_config = commandline_config
         self.translate_config = translate_config
-        self.extractor = TranslateLangExtractor(translate_help_instruction, translate_lang_list_instruction)
+        self.extractor = TranslateLangExtractor(translate_config, translate_help_instruction, translate_lang_list_instruction)
         self.translate_lang_list_instruction = translate_lang_list_instruction
         self.translate_help_instruction = translate_help_instruction
         self.googleTranslateApi = GoogleTranslateApi()

@@ -27,18 +27,18 @@ def get_core() -> Core:
     return ret
 
 
-def get_instructions(core_):
-    help_instruction = Help(core_.command_line_config.first_keyword)
-    ir = InstructionReferencer(help_instruction=help_instruction)
-    ir.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate(core_.commandline_config, core_.translate_config)))
+def get_instructions(core):
+    help_instruction = Help(core.commandline_config.first_keyword)
+    ir = InstructionReferencer(core.commandline_config, help_instruction=help_instruction)
+    ir.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate(core.commandline_config, core.translate_config)))
     ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation()))
     ir.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
     ir.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(ir.get_instruction_list)))
     ir.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))
-    return InstructionExtractor(core_.command_line_config.keywords, ir)
+    return InstructionExtractor(core.command_line_config.keywords, ir)
 
 
-core = get_core()
-instructions = get_instructions(core)
-discord_api = DiscordApi(core, instructions)
+core_instance = get_core()
+instructions = get_instructions(core_instance)
+discord_api = DiscordApi(core_instance, instructions)
 discord_api.run()

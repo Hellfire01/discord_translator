@@ -14,11 +14,11 @@ class Translate(InstructionParent):
         super(Translate, self).__init__("Translate")
         trans_help_instruc = "`" + self.commandline_config.first_keyword + " translate help`"
         trans_lang_list_instruc = "`" + self.commandline_config.first_keyword + " lang-list`"
-        translate_help = TranslateHelp()
+        translate_help = TranslateHelp(self.commandline_config, self.translate_config)
         nai_string = "The `translate` instruction needs arguments in order to work\nUse `" + self.commandline_config.first_keyword + " translate help` to see how to use this option"
         nai = NotAnInstruction(nai_string)
         translate_si = TranslateSubInstruction(commandline_config, translate_config, trans_help_instruc, trans_lang_list_instruc)
-        instruction_referencer = InstructionReferencer(help_instruction=translate_help, not_an_instruction=nai, default_instruction=translate_si)
+        instruction_referencer = InstructionReferencer(commandline_config, help_instruction=translate_help, not_an_instruction=nai, default_instruction=translate_si)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], translate_help))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 

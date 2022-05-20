@@ -23,10 +23,6 @@ class DatabaseInterface:
         with self.__get_session() as session:
             self.database.create_user(user_id, session)
 
-    def get_channel_preferences(self, channel_id):
-        with self.__get_session() as session:
-            return self.database.get_channel_preferences(session, channel_id)
-
     def set_user_channel_combo(self, user, channel, lang_in, lang_out):
         with self.__get_session() as session:
             pass
