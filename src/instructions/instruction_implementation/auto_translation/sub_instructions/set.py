@@ -1,6 +1,6 @@
 from src.instructions.enums.lang_enum import LangEnum
 from src.instructions.instruction_implementation.auto_translation.common.lang_instruction import LangInstruction
-from src.instructions.instruction_implementation.instruction_parent import InstructionParent
+from src.instructions.instruction_inheritance import InstructionParent
 
 
 class Set(InstructionParent):

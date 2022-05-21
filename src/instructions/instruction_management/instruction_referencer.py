@@ -1,5 +1,5 @@
-from src.instructions.instruction_implementation.not_an_instruction import NotAnInstruction
-from src.instructions.instruction_implementation.no_instruction import NoInstruction
+from src.instructions.instruction_implementation.generic_instructions.not_an_instruction import NotAnInstruction
+from src.instructions.instruction_implementation.generic_instructions.no_instruction import NoInstruction
 
 
 # dataclass that references the complete list of all the instruction_implementation
