@@ -8,8 +8,11 @@ class Get(InstructionParent):
         super(Get, self).__init__("Auto translation Get")
 
     def run(self, message):
-        split_message = " ".join(message.content.strip().split(" ")[3:])
-        return "Auto translation get todo"
+        channel = self.database_access.get_channel_instruction(message.channel.id)
+        if channel is None:
+            return "There is currently no auto translation enabled on the channel"
+        else:
+            return "The current auto translation setting for this channel is : " + channel.lang_string_instruction
 
     def get_description(self) -> str:
         return "This instruction will display the settings being applied in the current channel"
