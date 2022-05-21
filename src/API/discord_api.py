@@ -13,9 +13,9 @@ class DiscordApi(discord.Client):
             instruction = self.instructions_extractor.help_instruction
         else:
             instruction = self.instructions_extractor.get_instruction(message.content)
+        # auto run instructions is no instruction
         # self.database_interface.get_user(message.author.id)
-        print(message.channel.id)
-        ret += instruction.run(message.content)
+        ret += instruction.run(message)
         if ret != "":
             await message.channel.send(ret)
 

@@ -8,8 +8,8 @@ class TranslateLangExtractor:
         self.translate_help_instruction = "Use " + translate_help_instruction + " for help / to see examples"
         self.translate_lang_list_instruction = "Use " + translate_lang_list_instruction + " to see the available languages"
 
-    def __check_for_separator(self, message):
-        s_message = message.content.split(self.translate_config.separator)
+    def __check_for_separator(self, message_string):
+        s_message = message_string.split(self.translate_config.separator)
         if len(s_message) < 2:
             err = "I could not find the separator `" + self.translate_config.separator + "`"
             err += " that I need to know what to translate into what.\n"
@@ -77,8 +77,8 @@ class TranslateLangExtractor:
                     langs.append(buffer)
         return langs
 
-    def get_langs(self, message):
-        split_message = message.split("\n")
+    def get_langs(self, message_string):
+        split_message = message_string.split("\n")
         message_instruction_list = self.__check_for_separator(split_message[0])
         self.__check_for_instructions_text_separation(split_message)
         input_lang = self.__get_input_lang(message_instruction_list[0])

@@ -6,11 +6,11 @@ class InstructionExtractor:
         self.instruction_keywords = keywords
         self.instructions_references = instruction_referencer
 
-    def is_instruction(self, message):
+    def is_instruction(self, message_str):
         if len(self.instruction_keywords) == 0:
             return True
         for keyword in self.instruction_keywords:
-            if message.content.startswith(keyword):
+            if message_str.startswith(keyword):
                 return True
         return False
 
@@ -18,9 +18,9 @@ class InstructionExtractor:
     def help_instruction(self):
         return self.instructions_references.help_instruction
 
-    def get_instruction(self, message: str) -> InstructionParent:
-        clear_message = message.strip()
-        if self.is_instruction(message):
+    def get_instruction(self, message_str) -> InstructionParent:
+        clear_message = message_str.strip()
+        if self.is_instruction(clear_message):
             split_message = clear_message.split(' ')
             if len(split_message) < 2:
                 return self.instructions_references.not_an_instruction

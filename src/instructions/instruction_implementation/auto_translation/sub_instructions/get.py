@@ -2,7 +2,8 @@ from src.instructions.instruction_implementation.instruction_parent import Instr
 
 
 class Get(InstructionParent):
-    def __init__(self, database_access):
+    def __init__(self, commandline_config, database_access):
+        self.commandline_config = commandline_config
         self.database_access = database_access
         super(Get, self).__init__("Auto translation Get")
 
