@@ -2,7 +2,8 @@ from src.instructions.instruction_implementation.instruction_parent import Instr
 
 
 class Remove(InstructionParent):
-    def __init__(self):
+    def __init__(self, database_access):
+        self.database_access = database_access
         super(Remove, self).__init__("Auto translation Remove")
 
     def run(self, message):

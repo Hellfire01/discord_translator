@@ -1,9 +1,9 @@
 
 
 class DatabaseConfig:
-    def __init__(self, database_interface):
-        self.__database_interface = database_interface
+    def __init__(self, database_name):
+        self.__database_name = database_name
 
     @property
-    def database_interface(self):
-        return self.__database_interface
+    def database_name(self):
+        return self.__database_name

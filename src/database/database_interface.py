@@ -1,6 +1,6 @@
 from contextlib import contextmanager
-from src.database.database_commons import Session
 from src.database.database import Database
+from src.database.database_commons import Session
 
 
 # interfaces the Database class in order to wrap it
@@ -12,17 +12,22 @@ class DatabaseInterface:
         session.commit()
         session.close()
 
-    def __init__(self):
-        self.database = Database()
+    def __init__(self, database_config):
+        self.__database = Database(database_config)
 
     def get_user(self, user_id):
         with self.__get_session() as session:
-            self.database.get_user(user_id, session)
+            self.__database.get_user(user_id, session)
 
     def create_user(self, user_id):
         with self.__get_session() as session:
-            self.database.create_user(user_id, session)
+            self.__database.create_user(user_id, session)
 
-    def set_user_channel_combo(self, user, channel, lang_in, lang_out):
+    def get_channel_instruction(self, channel_id):
         with self.__get_session() as session:
-            pass
+            self.__database.get_channel_instruction(session, channel_id)
+
+    def set_channel_instruction(self, channel_id, channel_instruction):
+        with self.__get_session() as session:
+            self.__database.create_channel_instruction(session, channel_id, channel_instruction)
+

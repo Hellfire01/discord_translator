@@ -4,7 +4,8 @@ from src.database.database_commons import Base, Engine
 
 
 class Database:
-    def __init__(self):
+    def __init__(self, database_config):
+        self.database_config = database_config
         Base.metadata.create_all(Engine)
 
     # ==== users ====
@@ -23,18 +24,17 @@ class Database:
 
     # ==== channels ====
 
-    def get_channel(self, session, discord_id):
-        instance = session.query(ChannelModel).filter_by(channel_discord_id=discord_id).first()
+    def get_channel_instruction(self, session, channel_id):
+        instance = session.query(ChannelModel).filter_by(channel_discord_id=channel_id).first()
         return instance
 
-    def create_channel(self, session, discord_id):
-        if self.get_channel(discord_id, session) is None:
-            channel = ChannelModel(channel_discord_id=discord_id)
+    def create_channel_instruction(self, session, channel_id, instructions):
+        channel = self.get_channel_instruction(channel_id, session)
+        if channel is None:
+            channel = ChannelModel(channel_discord_id=channel_id, lang_string_instruction=instructions)
             session.add(channel)
+        else:
+            channel.lang_string_instruction = instructions
 
-    def update_channel(self, session, discord_id, langs):
-        channel = self.get_channel(discord_id, session)
-        channel.lang_string_instruction = langs
-
-    def get_channels(self, session):
+    def get_channel_instructions(self, session):
         return session.query(ChannelModel).all()

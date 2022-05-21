@@ -19,11 +19,12 @@ from src.instructions.instruction_implementation.list_languages import ListLangu
 
 def get_core() -> Core:
     commandline_config = CommandLineConfig(["!ot", "ouro-translator"])
-    database_config = DatabaseConfig(DatabaseInterface())
+    database_config = DatabaseConfig('database.db')
+    database_access = DatabaseInterface(database_config)
     discord_config = DiscordConfig(GetDiscordToken.get_discord_token('discord_token.txt'))
     translate_config = TranslateConfig("=>")
     logger = Logger('log.txt')
-    ret = Core(commandline_config, database_config, discord_config, translate_config, logger)
+    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access)
     return ret
 
 
@@ -31,7 +32,7 @@ def get_instructions(core):
     help_instruction = Help(core.commandline_config.first_keyword)
     ir = InstructionReferencer(core.commandline_config, help_instruction=help_instruction)
     ir.add_instruction(InstructionContainer(["-t", "translate", "--translate"], Translate(core.commandline_config, core.translate_config)))
-    ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation(core.commandline_config)))
+    ir.add_instruction(InstructionContainer(["-at", "auto-translation", "--auto-translation"], AutoTranslation(core.commandline_config, core.database_access)))
     ir.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
     ir.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(ir.get_instruction_list)))
     ir.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))

@@ -12,7 +12,7 @@ from src.instructions.instruction_implementation.auto_translation.sub_instructio
 
 
 class AutoTranslation(InstructionParent):
-    def __init__(self, commandline_config):
+    def __init__(self, commandline_config, database_access):
         self.commandline_config = commandline_config
         super(AutoTranslation, self).__init__("Auto Translation")
         auto_translation_help_instruc = "`" + self.commandline_config.first_keyword+ " auto translation help`"
@@ -22,9 +22,9 @@ class AutoTranslation(InstructionParent):
         sub_instruction = SubInstruction(commandline_config, auto_translation_help_instruc)
         instruction_referencer = InstructionReferencer(commandline_config, auto_translation_help, not_an_instruction=nai, default_instruction=sub_instruction)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], auto_translation_help))
-        instruction_referencer.add_instruction(InstructionContainer(["-s", "set", "--set"], Set()))
-        instruction_referencer.add_instruction(InstructionContainer(["-g", "get", "--get"], Get()))
-        instruction_referencer.add_instruction(InstructionContainer(["-r", "remove", "--remove"], Remove()))
+        instruction_referencer.add_instruction(InstructionContainer(["-s", "set", "--set"], Set(database_access)))
+        instruction_referencer.add_instruction(InstructionContainer(["-g", "get", "--get"], Get(database_access)))
+        instruction_referencer.add_instruction(InstructionContainer(["-r", "remove", "--remove"], Remove(database_access)))
         instruction_referencer.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(instruction_referencer.get_instruction_list, "Auto translation ")))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
