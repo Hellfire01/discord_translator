@@ -1,9 +1,11 @@
 from src.instructions.enums.lang_enum import LangEnum
+from src.instructions.instruction_implementation.auto_translation.common.lang_instruction import LangInstruction
 from src.instructions.instruction_implementation.instruction_parent import InstructionParent
 
 
 class Set(InstructionParent):
-    def __init__(self, commandline_config):
+    def __init__(self, commandline_config, database_access):
+        self.database_access = database_access
         self.commandline_config = commandline_config
         super(Set, self).__init__("Auto translation Set")
 
@@ -15,7 +17,7 @@ class Set(InstructionParent):
                 return lang
         return LangEnum.NOT_A_LANG
 
-    def run(self, message):
+    def run(self, message, message_class):
         split_message = message.strip().split(" ")[1:]
         if len(split_message) == 0:
             return "This instruction requires at least one language given as parameter"
@@ -27,10 +29,9 @@ class Set(InstructionParent):
                 ret += "to have the list of valid languages use : `" + self.commandline_config.first_keyword + " lang-list`"
                 return ret
             langs.add(lang)
-        # is channel already in database ?
-        # if yes overwrite existing auto translation and say so
-        # if no, set auto translation and recap instruction
-        return "Auto translation set todo"
+        lang_str = LangInstruction.get_instruction_from_langs(langs)
+        self.database_access.set_channel_instruction(message_class.channel.id, lang_str)
+        return "setting current channel auto translation to : " + lang_str
 
     def get_description(self) -> str:
         ret = "The set instruction tells the translator that you would like the current channel to be auto translated\n"
