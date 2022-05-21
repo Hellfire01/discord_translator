@@ -8,7 +8,7 @@ from src.instructions.instruction_implementation.translate.translate_sub_instruc
 
 
 class Translate(InstructionParent):
-    def __init__(self, commandline_config, translate_config):
+    def __init__(self, commandline_config, translate_config, google_translate_api):
         self.commandline_config = commandline_config
         self.translate_config = translate_config
         super(Translate, self).__init__("Translate")
@@ -17,7 +17,7 @@ class Translate(InstructionParent):
         translate_help = TranslateHelp(self.commandline_config, self.translate_config)
         nai_string = "The `translate` instruction needs arguments in order to work\nUse `" + self.commandline_config.first_keyword + " translate help` to see how to use this option"
         nai = NotAnInstruction(nai_string)
-        translate_si = TranslateSubInstruction(commandline_config, translate_config, trans_help_instruc, trans_lang_list_instruc)
+        translate_si = TranslateSubInstruction(commandline_config, translate_config, google_translate_api, trans_help_instruc, trans_lang_list_instruc)
         instruction_referencer = InstructionReferencer(commandline_config, translate_help, not_an_instruction=nai, default_instruction=translate_si)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], translate_help))
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)

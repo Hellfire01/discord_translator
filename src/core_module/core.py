@@ -1,13 +1,14 @@
 
 
 class Core:
-    def __init__(self, commandline_config, database_config, discord_config, translate_config, logger, database_access):
+    def __init__(self, commandline_config, database_config, discord_config, translate_config, logger, database_access, google_translate_api):
         self.__commandline_config = commandline_config
         self.__database_config = database_config
         self.__discord_config = discord_config
         self.__translate_config = translate_config
         self.__logger = logger
         self.__database_access = database_access
+        self.__google_translate_api = google_translate_api
 
     @property
     def commandline_config(self):
@@ -32,3 +33,7 @@ class Core:
     @property
     def database_access(self):
         return self.__database_access
+
+    @property
+    def google_translate_api(self):
+        return self.__google_translate_api
