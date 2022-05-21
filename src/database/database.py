@@ -29,7 +29,7 @@ class Database:
         return instance
 
     def create_channel_instruction(self, session, channel_id, instructions):
-        channel = self.get_channel_instruction(channel_id, session)
+        channel = self.get_channel_instruction(session, channel_id)
         if channel is None:
             channel = ChannelModel(channel_discord_id=channel_id, lang_string_instruction=instructions)
             session.add(channel)

@@ -8,8 +8,8 @@ class SubInstruction(InstructionParent):
         super(SubInstruction, self).__init__("Auto translation Instruction")
 
     def run(self, message) -> str:
-        ret = "not yet implemented"
-        return ret
+        return "use `" + self.commandline_config.first_keyword + " auto-translation help` in order to know how to use" \
+                                                                 "this instruction"
 
     def get_description(self):
         return "use `" + self.commandline_config.first_keyword + " auto-translation help` in order to know how to use" \

@@ -31,7 +31,7 @@ class AutoTranslation(InstructionParent):
     def run(self, message) -> str:
         s_message = " ".join(message.content.strip().split(" ")[2:])
         instruction = self.instruction_extractor.get_instruction(s_message)
-        ret = instruction.run(s_message)
+        ret = instruction.run(message)
         return ret
 
     def get_description(self):

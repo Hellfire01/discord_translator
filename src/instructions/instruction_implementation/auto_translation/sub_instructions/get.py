@@ -8,6 +8,7 @@ class Get(InstructionParent):
         super(Get, self).__init__("Auto translation Get")
 
     def run(self, message):
+        split_message = " ".join(message.content.strip().split(" ")[3:])
         return "Auto translation get todo"
 
     def get_description(self) -> str:

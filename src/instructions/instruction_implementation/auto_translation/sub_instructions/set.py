@@ -18,7 +18,7 @@ class Set(InstructionParent):
         return LangEnum.NOT_A_LANG
 
     def run(self, message):
-        split_message = message.content.strip().split(" ")[1:]
+        split_message = message.content.strip().split(" ")[3:]
         if len(split_message) == 0:
             return "This instruction requires at least one language given as parameter"
         langs = set()

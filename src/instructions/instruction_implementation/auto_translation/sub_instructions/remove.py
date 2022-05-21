@@ -8,6 +8,7 @@ class Remove(InstructionParent):
         super(Remove, self).__init__("Auto translation Remove")
 
     def run(self, message):
+        split_message = " ".join(message.content.strip().split(" ")[3:])
         return "Auto translation remove todo"
 
     def get_description(self) -> str:
