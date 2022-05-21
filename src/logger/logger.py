@@ -13,22 +13,22 @@ class Logger:
         return self.__output_file
 
     # Confirmation that things are working as expected.
-    def info(self, message):
-        logging.info(message)
+    def info(self, log):
+        logging.info(log)
 
     # An indication that something unexpected happened, or indicative of some problem in the near future
     # (e.g. ‘disk space low’). The software is still working as expected.
-    def warning(self, message):
-        logging.warning(message)
+    def warning(self, log):
+        logging.warning(log)
 
     # Detailed information, typically of interest only when diagnosing problems.
-    def debug(self, message):
-        logging.debug(message)
+    def debug(self, log):
+        logging.debug(log)
 
     # Due to a more serious problem, the software has not been able to perform some function.
-    def error(self, message):
-        logging.error(message)
+    def error(self, log):
+        logging.error(log)
 
     # A serious error, indicating that the program itself may be unable to continue running.
-    def critical(self, message):
-        logging.critical(message)
+    def critical(self, log):
+        logging.critical(log)

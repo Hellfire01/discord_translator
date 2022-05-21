@@ -9,7 +9,7 @@ class NotAnInstruction(InstructionParent):
 
     def run(self, message) -> str:
         ret = ""
-        if message.strip() == self.commandline_config.first_keyword:
+        if message.content.strip() == self.commandline_config.first_keyword:
             ret = "you need to give me an instruction if you want me to do something\n"
         else:
             ret += "I'm sorry I could not understand this instruction :cry:\n"

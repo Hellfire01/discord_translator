@@ -9,12 +9,12 @@ class TranslateLangExtractor:
         self.translate_lang_list_instruction = "Use " + translate_lang_list_instruction + " to see the available languages"
 
     def __check_for_separator(self, message):
-        s_message = message.split(self.translate_config.separator)
+        s_message = message.content.split(self.translate_config.separator)
         if len(s_message) < 2:
-            message = "I could not find the separator `" + self.translate_config.separator + "`"
-            message += " that I need to know what to translate into what.\n"
-            message += self.translate_help_instruction
-            raise TranslateException(message)
+            err = "I could not find the separator `" + self.translate_config.separator + "`"
+            err += " that I need to know what to translate into what.\n"
+            err += self.translate_help_instruction
+            raise TranslateException(err)
         return s_message
 
     def __check_for_instructions_text_separation(self, split_message):

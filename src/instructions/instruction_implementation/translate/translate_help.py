@@ -7,7 +7,7 @@ class TranslateHelp(InstructionParent):
         self.translate_config = translate_config
         super(TranslateHelp, self).__init__("Translate Help")
 
-    def run(self, message):
+    def run(self, message.content):
         ret = "This is the `translate` option\n"
         ret += "The translation is made using google translate\n"
         ret += "The option is used for a direct translation between a given text and the expected output\n"

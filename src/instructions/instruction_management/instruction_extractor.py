@@ -10,7 +10,7 @@ class InstructionExtractor:
         if len(self.instruction_keywords) == 0:
             return True
         for keyword in self.instruction_keywords:
-            if message.startswith(keyword):
+            if message.content.startswith(keyword):
                 return True
         return False
 

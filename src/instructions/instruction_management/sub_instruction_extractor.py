@@ -10,7 +10,7 @@ class SubInstructionExtractor:
         return self.instructions_references.help_instruction
 
     def get_instruction(self, message):
-        clear_message = message.strip()
+        clear_message = message.content.strip()
         split_message = clear_message.split(' ')
         if len(split_message) == 0 or len(split_message) == 1 and split_message[0] == "":
             return self.instructions_references.not_an_instruction

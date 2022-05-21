@@ -29,7 +29,7 @@ class AutoTranslation(InstructionParent):
         self.instruction_extractor = SubInstructionExtractor([], instruction_referencer)
 
     def run(self, message) -> str:
-        s_message = " ".join(message.strip().split(" ")[2:])
+        s_message = " ".join(message.content.strip().split(" ")[2:])
         instruction = self.instruction_extractor.get_instruction(s_message)
         ret = instruction.run(s_message)
         return ret

@@ -17,7 +17,7 @@ class TranslateSubInstruction(InstructionParent):
 
     def run(self, message) -> str:
         try:
-            input_lang, output_langs = self.extractor.get_langs(" ".join(message.strip().split(" ")))
+            input_lang, output_langs = self.extractor.get_langs(" ".join(message.content.strip().split(" ")))
             ret = "requested input lang is "
             if input_lang == LangEnum.NOT_A_LANG:
                 ret += "to be automatically detected\n"
@@ -32,7 +32,7 @@ class TranslateSubInstruction(InstructionParent):
                     ret += ", "
                 ret += output_lang.name
             ret += "\n"
-            to_translate = "\n".join(message.split("\n")[1:])
+            to_translate = "\n".join(message.content.split("\n")[1:])
             for output_lang in output_langs:
                 ret += "\n" + output_lang.emotes[0] + " " + self.googleTranslateApi.translate(to_translate, input_lang, output_lang)
         except TranslateException as e:

@@ -8,8 +8,8 @@ class GoogleTranslateApi:
 
     def translate(self, message, input_lang, output_lang) -> str:
         if input_lang is not LangEnum.NOT_A_LANG:
-            buffer = self.translator.translate(message, src=input_lang.acronym, dest=output_lang.acronym)
+            buffer = self.translator.translate(message.content, src=input_lang.acronym, dest=output_lang.acronym)
             return buffer.text
         else:
-            buffer = self.translator.translate(message, dest=output_lang.acronym)
+            buffer = self.translator.translate(message.content, dest=output_lang.acronym)
             return buffer.text

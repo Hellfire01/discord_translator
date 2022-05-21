@@ -17,8 +17,8 @@ class Set(InstructionParent):
                 return lang
         return LangEnum.NOT_A_LANG
 
-    def run(self, message, message_class):
-        split_message = message.strip().split(" ")[1:]
+    def run(self, message):
+        split_message = message.content.strip().split(" ")[1:]
         if len(split_message) == 0:
             return "This instruction requires at least one language given as parameter"
         langs = set()
@@ -30,7 +30,7 @@ class Set(InstructionParent):
                 return ret
             langs.add(lang)
         lang_str = LangInstruction.get_instruction_from_langs(langs)
-        self.database_access.set_channel_instruction(message_class.channel.id, lang_str)
+        self.database_access.set_channel_instruction(message.channel.id, lang_str)
         return "setting current channel auto translation to : " + lang_str
 
     def get_description(self) -> str:
