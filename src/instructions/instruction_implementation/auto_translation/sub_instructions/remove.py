@@ -8,8 +8,8 @@ class Remove(InstructionParent):
         super(Remove, self).__init__("Auto translation Remove")
 
     def run(self, message):
-        split_message = " ".join(message.content.strip().split(" ")[3:])
-        return "Auto translation remove todo"
+        self.database_access.remove_channel_instruction(message.channel.id)
+        return "Current channel was removed from all auto translation"
 
     def get_description(self) -> str:
         ret = "This instruction will remove this channel from the list of managed channels.\n"

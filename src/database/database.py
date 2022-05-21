@@ -36,5 +36,8 @@ class Database:
         else:
             channel.lang_string_instruction = instructions
 
+    def remove_channel_instruction(self, session, channel_id):
+        session.query(ChannelModel).filter_by(channel_discord_id=channel_id).delete()
+
     def get_channel_instructions(self, session):
         return session.query(ChannelModel).all()

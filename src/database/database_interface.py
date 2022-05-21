@@ -25,13 +25,20 @@ class DatabaseInterface:
         with self.__get_session_commit() as session:
             self.__database.create_user(user_id, session)
 
+    # ==== channels ====
+
     def get_channel_instruction(self, channel_id):
         with self.__get_session_commit() as session:
             channel = self.__database.get_channel_instruction(session, channel_id)
-            session.expunge(channel)
+            if channel is not None:
+                session.expunge(channel)
             return channel
 
     def set_channel_instruction(self, channel_id, channel_instruction):
         with self.__get_session_commit() as session:
             self.__database.create_channel_instruction(session, channel_id, channel_instruction)
+
+    def remove_channel_instruction(self, channel_id):
+        with self.__get_session_commit() as session:
+            self.__database.remove_channel_instruction(session, channel_id)
 
