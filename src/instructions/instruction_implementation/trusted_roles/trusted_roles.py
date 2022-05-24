@@ -11,14 +11,13 @@ from src.instructions.instruction_implementation.auto_translation.sub_instructio
 from src.instructions.instruction_implementation.auto_translation.sub_instructions.remove import Remove
 
 
-class AutoTranslation(InstructionParent):
+class TrustedRoles(InstructionParent):
     def __init__(self, commandline_config, database_access):
         self.commandline_config = commandline_config
-        super(AutoTranslation, self).__init__("Auto Translation")
-        auto_translation_help_instruc = "`" + self.commandline_config.first_keyword + " auto-translation help`"
+        super(TrustedRoles, self).__init__("Trusted Roles")
+        auto_translation_help_instruc = "`" + self.commandline_config.first_keyword + " truest-roles help`"
         auto_translation_help = Help()
-        nai = NotAnInstruction(commandline_config, "The `auto-translation` instruction needs arguments in order to work\nUse `" +
-                               self.commandline_config.first_keyword+ " auto-translation help` to see how to use this option")
+        nai = NotAnInstruction(commandline_config, "The `trusted-roles` instruction needs arguments in order to work\nUse `" + self.commandline_config.first_keyword + " trusted-roles help` to see how to use this option")
         sub_instruction = SubInstruction(commandline_config, auto_translation_help_instruc)
         instruction_referencer = InstructionReferencer(commandline_config, auto_translation_help, not_an_instruction=nai, default_instruction=sub_instruction)
         instruction_referencer.add_instruction(InstructionContainer(["-h", "help", "--help"], auto_translation_help))

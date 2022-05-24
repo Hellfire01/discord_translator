@@ -11,3 +11,4 @@ class LangEnum(Enum):
     RUSSIAN = Lang([":flag_ru:"], "russian", "ru")
     SPANISH = Lang([":flag_es:"], "spanish", "es")
     UKRAINIAN = Lang([":flag_ua:"], "ukrainian", "uk")
+    PORTUGUESE = Lang([":flag_pt:"], "portuguese", "pt")

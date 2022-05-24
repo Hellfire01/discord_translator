@@ -1,4 +1,3 @@
-from src.logger.logger import Logger
 from src.instructions.enums.lang_enum import LangEnum
 
 

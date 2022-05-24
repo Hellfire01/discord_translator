@@ -11,4 +11,4 @@ class Help(InstructionParent):
         return ret
 
     def get_description(self) -> str:
-        return "this instruction_implementation shows you how to use the `auto-translation` option"
+        return "this instruction implementation shows you how to use the `auto-translation` option"
