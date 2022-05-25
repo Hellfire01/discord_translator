@@ -35,6 +35,6 @@ class TrustedRoles(InstructionParent):
         return ret
 
     def get_description(self):
-        ret = "this instruction is used in order to set up automated translation for a channel\n"
-        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword + " channel-settings help`"
+        ret = "this instruction is used in order to tell the translator what are the roles that are allowed to set up / edit / remove the automated translation channels\n"
+        ret += "in order to use get ore information on this instruction, use `" + self.commandline_config.first_keyword + " trusted-roles help`"
         return ret
