@@ -17,6 +17,7 @@ from src.instructions.instruction_implementation.auto_translation.auto_translati
 from src.instructions.instruction_implementation.instruction_list import InstructionList
 from src.instructions.instruction_implementation.list_languages import ListLanguages
 from src.instructions.instruction_implementation.auto_translation.automated.automated_translation_exec import AutomatedTranslationExec
+from src.instructions.instruction_implementation.trusted_roles.trusted_roles import TrustedRoles
 
 
 def get_core() -> Core:
@@ -39,6 +40,7 @@ def get_instructions(core):
     ir.add_instruction(InstructionContainer(["-h", "help", "--help"], help_instruction))
     ir.add_instruction(InstructionContainer(["-l", "list", "--list"], InstructionList(ir.get_instruction_list)))
     ir.add_instruction(InstructionContainer(["-ll", "lang-list", "--lang-list"], ListLanguages()))
+    ir.add_instruction(InstructionContainer(["-tr", "trusted-roles", "--trusted-roles"], TrustedRoles(core.commandline_config, core.database_access)))
     return InstructionExtractor(core.commandline_config.keywords, ir)
 
 
