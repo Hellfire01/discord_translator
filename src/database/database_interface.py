@@ -38,15 +38,16 @@ class DatabaseInterface:
     # trusted roles
 
     def get_trusted_roles(self, discord_guild_id):
-        return []
+        with self.__get_session_commit() as session:
+            return self.__database.get_trusted_roles_discord(session, discord_guild_id)
 
-    def set_trusted_roles(self, discord_guild_id, trusted_roles_id_list):
+    def set_trusted_roles(self, discord_guild_id, trusted_roles_list):
         self.__logger.info("added the following trusted roles for the discord " + str(discord_guild_id) + " : " + ", ".join(str(x) for x in trusted_roles_id_list))
         with self.__get_session_commit() as session:
-            for trusted_role_id in trusted_roles_id_list:
-                self.__database.get_or_create_trusted_role(session, discord_guild_id, trusted_role_id)
+            for trusted_role in trusted_roles_list:
+                self.__database.get_or_create_trusted_role(session, discord_guild_id, trusted_role.id, trusted_role.name)
 
-    def remove_trusted_roles(self, discord_guild_id, trusted_roles_id_list):
+    def remove_trusted_roles(self, discord_guild_id, trusted_roles_list):
         self.__logger.info("removed all trusted roles for the channel " + str(discord_guild_id))
         with self.__get_session_commit() as session:
-            self.__database.remove_one_trusted_role(session, trusted_roles_id_list)
+            self.__database.remove_one_trusted_role(session, trusted_roles_list)
