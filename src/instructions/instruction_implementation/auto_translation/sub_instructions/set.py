@@ -21,14 +21,15 @@ class Set(InstructionParent):
         split_message = message.content.strip().split(" ")[3:]
         if len(split_message) == 0:
             return "This instruction requires at least one language given as parameter"
-        langs = set()
+        langs = []
         for lang_string in split_message:
             lang = self.__get_lang(lang_string)
             if lang is LangEnum.NOT_A_LANG:
                 ret = "'" + lang_string + "' is not recognised as a valid language\n"
                 ret += "to have the list of valid languages use : `" + self.commandline_config.first_keyword + " lang-list`"
                 return ret
-            langs.add(lang)
+            if lang not in langs:
+                langs.append(lang)
         lang_str = LangInstruction.get_instruction_from_langs(langs)
         self.database_access.set_channel_instruction(message.channel.id, lang_str)
         return "setting current channel auto translation to : " + lang_str
