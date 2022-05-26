@@ -11,7 +11,7 @@ class GetPermission:
         allowed_roles = database_access.get_trusted_roles(message.guild.id)
         user_roles = message.author.roles
         for (allowed_role, user_role) in product(allowed_roles, user_roles):
-            if allowed_role.id == user_role.id:
+            if allowed_role.role_discord_id == user_role.id:
                 return True
         return False
 
