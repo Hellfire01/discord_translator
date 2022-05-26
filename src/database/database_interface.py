@@ -28,7 +28,7 @@ class DatabaseInterface:
     def set_channel_instruction(self, channel_id, channel_instruction):
         self.__logger.info("set the following instructions : '" + channel_instruction + "' for the channel " + str(channel_id))
         with self.__get_session_commit() as session:
-            self.__database.create_channel_instruction(session, channel_id, channel_instruction)
+            self.__database.get_or_create_channel_instruction(session, channel_id, channel_instruction)
 
     def remove_channel_instruction(self, channel_id):
         self.__logger.info("removed all instructions for the channel " + str(channel_id))

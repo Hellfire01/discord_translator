@@ -15,13 +15,14 @@ class Database:
         instance = session.query(ChannelModel).filter_by(channel_discord_id=channel_id).first()
         return instance
 
-    def create_channel_instruction(self, session, channel_id, instructions):
+    def get_or_create_channel_instruction(self, session, channel_id, instructions):
         channel = self.get_channel_instruction(session, channel_id)
         if channel is None:
             channel = ChannelModel(channel_discord_id=channel_id, lang_string_instruction=instructions)
             session.add(channel)
         else:
             channel.lang_string_instruction = instructions
+        return channel
 
     def remove_channel_instruction(self, session, channel_id):
         session.query(ChannelModel).filter_by(channel_discord_id=channel_id).delete()
@@ -30,6 +31,26 @@ class Database:
         return session.query(ChannelModel).all()
 
     # === roles ===
+
+    def get_trusted_role(self, session, discord_guild_id):
+        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=discord_guild_id).first()
+        return instance
+
+    def get_or_create_trusted_role(self, session, discord_guild_id, trusted_role_id):
+        trusted_role = self.get_trusted_role(session, trusted_role_id)
+        if trusted_role is None:
+            discord_guild = self.get_or_create_discord_guild(session, discord_guild_id)
+            trusted_role = TrustedRoleModel(role_discord_id=trusted_role_id, discord_guild=discord_guild)
+            session.add(trusted_role)
+
+    def remove_one_trusted_role(self, session, trusted_role_id):
+        session.query(TrustedRoleModel).filter_by(role_discord_id=trusted_role_id).delete()
+
+    def remove_all_trusted_roles(self, session, discord_guild_id):
+        session.query(TrustedRoleModel).filter_by(discord_guild_id=discord_guild_id).delete()
+
+    def get_trusted_roles(self, session):
+        return session.query(TrustedRoleModel).all()
 
     # === discord guild ===
     # note :
@@ -40,8 +61,9 @@ class Database:
         instance = session.query(DiscordGuildModel).filter_by(guild_discord_id=discord_guild_id).first()
         return instance
 
-    def create_discord_guild(self, session, discord_guild_id):
+    def get_or_create_discord_guild(self, session, discord_guild_id):
         discord_guild = self.get_discord_guild(session, discord_guild_id)
         if discord_guild is None:
             discord_guild = DiscordGuildModel(guild_discord_id=discord_guild_id)
             session.add(discord_guild)
+        return discord_guild
