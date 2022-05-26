@@ -39,10 +39,14 @@ class DatabaseInterface:
 
     def get_trusted_roles(self, discord_guild_id):
         with self.__get_session_commit() as session:
-            return self.__database.get_trusted_roles_discord(session, discord_guild_id)
+            roles = self.__database.get_trusted_roles_discord(session, discord_guild_id)
+            for role in roles:
+                if role is not None:
+                    session.expunge(role)
+            return roles
 
     def set_trusted_roles(self, discord_guild_id, trusted_roles_list):
-        self.__logger.info("added the following trusted roles for the discord " + str(discord_guild_id) + " : " + ", ".join(str(x) for x in trusted_roles_id_list))
+        self.__logger.info("added the following trusted roles for the discord " + str(discord_guild_id) + " : " + ", ".join(str(x.id) + " / " + str(x.name) for x in trusted_roles_list))
         with self.__get_session_commit() as session:
             for trusted_role in trusted_roles_list:
                 self.__database.get_or_create_trusted_role(session, discord_guild_id, trusted_role.id, trusted_role.name)

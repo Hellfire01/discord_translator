@@ -13,11 +13,11 @@ class Set(InstructionParent):
             ret = "I apologise but only the discord guild owner may use this instruction\n"
             ret += "The owner of the discord guild can add allowed roles using the `" + self.commandline_config.first_keyword + " trusted-roles` instruction\n"
             return ret
-        role_ids = []
-        for role_id in message.raw_role_mentions:
-            if role_id not in role_ids:
-                role_ids.append(role_id)
-        self.database_access.set_trusted_roles(message.guild.id, role_ids)
+        roles = []
+        for role in message.role_mentions:
+            if role not in roles:
+                roles.append(role)
+        self.database_access.set_trusted_roles(message.guild.id, roles)
         ret = "set the following roles to be able to edit the auto translation settings :\n"
         role_names = []
         for role_mention in message.role_mentions:
