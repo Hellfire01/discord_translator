@@ -28,3 +28,20 @@ class Database:
 
     def get_channel_instructions(self, session):
         return session.query(ChannelModel).all()
+
+    # === roles ===
+
+    # === discord guild ===
+    # note :
+    # this section has no removal yet
+    # removal would need a check that there are no longer any attached allowed roles
+
+    def get_discord_guild(self, session, discord_guild_id):
+        instance = session.query(DiscordGuildModel).filter_by(guild_discord_id=discord_guild_id).first()
+        return instance
+
+    def create_discord_guild(self, session, discord_guild_id):
+        discord_guild = self.get_discord_guild(session, discord_guild_id)
+        if discord_guild is None:
+            discord_guild = DiscordGuildModel(guild_discord_id=discord_guild_id)
+            session.add(discord_guild)

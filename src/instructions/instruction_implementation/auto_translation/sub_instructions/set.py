@@ -1,6 +1,6 @@
 from src.instructions.enums.lang_enum import LangEnum
 from src.instructions.instruction_implementation.auto_translation.common.lang_instruction import LangInstruction
-from src.instructions.instruction_implementation.auto_translation.common.get_permission import GetPermission
+from src.instructions.instruction_implementation.comon.get_permission import GetPermission
 from src.instructions.instruction_inheritance import InstructionParent
 
 
@@ -19,7 +19,7 @@ class Set(InstructionParent):
         return LangEnum.NOT_A_LANG
 
     def run(self, message):
-        if GetPermission.check_if_allowed(message) is False:
+        if GetPermission.check_if_allowed(message, self.database_access) is False:
             ret = "I apologise it seams you do not have the required permissions in order to change the auto translation settings\n"
             ret += "By default only the owner of the discord guild can change this setting\n"
             ret += "The owner of the discord guild can add allowed roles using the `" + self.commandline_config.first_keyword + " trusted-roles` instruction\n"
