@@ -15,16 +15,6 @@ class DatabaseInterface:
     def __init__(self, database_config):
         self.__database = Database(database_config)
 
-    def get_user(self, user_id):
-        with self.__get_session_commit() as session:
-            user = self.__database.get_user(user_id, session)
-            session.expunge(user)
-            return user
-
-    def create_user(self, user_id):
-        with self.__get_session_commit() as session:
-            self.__database.create_user(user_id, session)
-
     # ==== channels ====
 
     def get_channel_instruction(self, channel_id):
