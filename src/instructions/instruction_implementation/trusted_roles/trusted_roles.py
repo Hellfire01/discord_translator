@@ -16,7 +16,7 @@ class TrustedRoles(InstructionParent):
         self.commandline_config = commandline_config
         super(TrustedRoles, self).__init__("Trusted Roles")
         trusted_roles_help_instruc = "`" + self.commandline_config.first_keyword + " trusted-roles help`"
-        trusted_roles_help = Help()
+        trusted_roles_help = Help(self.commandline_config)
         nai = NotAnInstruction(commandline_config, "The `trusted-roles` instruction needs arguments in order to work\nUse `" + self.commandline_config.first_keyword + " trusted-roles help` to see how to use this option")
         sub_instruction = SubInstruction(commandline_config, trusted_roles_help_instruc)
         instruction_referencer = InstructionReferencer(commandline_config, trusted_roles_help, not_an_instruction=nai, default_instruction=sub_instruction)
