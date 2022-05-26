@@ -37,7 +37,7 @@ class Database:
         return instance
 
     def get_trusted_roles_discord(self, session, discord_guild_id):
-        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=discord_guild_id)
+        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=discord_guild_id).all()
         return instance
 
     def get_or_create_trusted_role(self, session, discord_guild_id, trusted_role_id, trusted_role_name):

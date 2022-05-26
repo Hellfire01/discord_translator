@@ -14,9 +14,8 @@ class Get(InstructionParent):
             ret += "The owner of the discord guild can add allowed roles using the `" + self.commandline_config.first_keyword + " trusted-roles` instruction\n"
             return ret
         roles = self.database_access.get_trusted_roles(message.guild.id)
-        print("==============")
-        print(roles)
-        print("==============")
+        if len(roles) == 0:
+            return "There are currently no roles allowed to edit the auto translate settings on this discord guild\n"
         ret = "The roles that can edit this discord's guild auto translation settings are : \n"
         ret += ", ".join(role.name for role in roles)
         return ret
