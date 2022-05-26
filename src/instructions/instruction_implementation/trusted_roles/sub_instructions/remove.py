@@ -13,7 +13,18 @@ class Remove(InstructionParent):
             ret = "I apologise but only the discord guild owner may use this instruction\n"
             ret += "The owner of the discord guild can add allowed roles using the `" + self.commandline_config.first_keyword + " trusted-roles` instruction\n"
             return ret
-        return ""
+        role_ids = []
+        for role_id in message.raw_role_mentions:
+            if role_id not in role_ids:
+                role_ids.append(role_id)
+        self.database_access.remove_trusted_roles(message.guild.id, role_ids)
+        ret = "removed the following roles from being able to edit the auto translation settings :\n"
+        role_names = []
+        for role_mention in message.role_mentions:
+            if role_mention.name not in role_names:
+                role_names.append(role_mention.name)
+        ret += "\n".join(role_names)
+        return ret
 
     def get_description(self) -> str:
         return "trusted roles remove description todo"

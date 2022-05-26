@@ -22,7 +22,7 @@ class Set(InstructionParent):
         role_names = []
         for role_mention in message.role_mentions:
             if role_mention.name not in role_names:
-                role_names += role_mention.name
+                role_names.append(role_mention.name)
         ret += "\n".join(role_names)
         return ret
 
