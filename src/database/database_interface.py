@@ -12,8 +12,9 @@ class DatabaseInterface:
         session.commit()
         session.close()
 
-    def __init__(self, database_config):
+    def __init__(self, database_config, logger):
         self.__database = Database(database_config)
+        self.__logger = logger
 
     # ==== channels ====
 
@@ -25,10 +26,12 @@ class DatabaseInterface:
             return channel
 
     def set_channel_instruction(self, channel_id, channel_instruction):
+        self.__logger.log("set the following instructions : '" + channel_instruction + "' for the channel " + str(channel_id))
         with self.__get_session_commit() as session:
             self.__database.create_channel_instruction(session, channel_id, channel_instruction)
 
     def remove_channel_instruction(self, channel_id):
+        self.__logger.log("removed all instructions for the channel " + str(channel_id))
         with self.__get_session_commit() as session:
             self.__database.remove_channel_instruction(session, channel_id)
 

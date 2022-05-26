@@ -22,11 +22,11 @@ from src.instructions.instruction_implementation.trusted_roles.trusted_roles imp
 
 def get_core() -> Core:
     commandline_config = CommandLineConfig(["!ot", "ouro-translator"])
-    database_config = DatabaseConfig('database.db')
-    database_access = DatabaseInterface(database_config)
     discord_config = DiscordConfig(GetDiscordToken.get_discord_token('discord_token.txt'))
     translate_config = TranslateConfig("=>")
     logger = Logger('log.txt')
+    database_config = DatabaseConfig('database.db')
+    database_access = DatabaseInterface(database_config, logger)
     gtapi = GoogleTranslateApi()
     ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, gtapi)
     return ret

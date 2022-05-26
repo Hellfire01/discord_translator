@@ -7,20 +7,23 @@ class DiscordApi(discord.Client):
         self.core.logger.info("bot is ready")
 
     async def on_message(self, message):
-        if message.author == self.user:
-            return  # ignore the bot itself to prevent feedback loop
-        ret = ""
-        if str(self.user.id) in message.content:
-            instruction = self.instructions_extractor.help_instruction
-        else:
-            instruction = self.instructions_extractor.get_instruction(message.content)
-        if type(instruction) is NoInstruction:
-            for automated_instruction in self.automated_instructions:
-                ret += automated_instruction.run(message)
-        else:
-            ret += instruction.run(message)
-        if ret != "":
-            await message.channel.send(ret)
+        try:
+            if message.author == self.user:
+                return  # ignore the bot itself to prevent feedback loop
+            ret = ""
+            if str(self.user.id) in message.content:
+                instruction = self.instructions_extractor.help_instruction
+            else:
+                instruction = self.instructions_extractor.get_instruction(message.content)
+            if type(instruction) is NoInstruction:
+                for automated_instruction in self.automated_instructions:
+                    ret += automated_instruction.run(message)
+            else:
+                ret += instruction.run(message)
+            if ret != "":
+                await message.channel.send(ret)
+        except Exception as e:
+            self.core.logger.error("got uncaught exception of type : " + str(type(e)) + "\n message is :\n" + str(e))
 
     async def on_message_edit(self, before, after):
         pass
