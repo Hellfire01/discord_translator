@@ -17,7 +17,7 @@ class Get(InstructionParent):
         if len(roles) == 0:
             return "There are currently no roles allowed to edit the auto translate settings on this discord guild\n"
         ret = "The roles that can edit this discord's guild auto translation settings are : \n"
-        ret += ", ".join(role.name for role in roles)
+        ret += "\n".join(role.role_name for role in roles)
         return ret
 
     def get_description(self) -> str:
