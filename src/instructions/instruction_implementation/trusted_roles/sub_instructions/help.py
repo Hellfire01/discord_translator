@@ -7,7 +7,7 @@ class Help(InstructionParent):
         super(Help, self).__init__("Trusted Roles Help")
 
     def run(self, message):
-        ret = "This is the `trusted-roles` option\n"
+        ret = "This is the `trusted-roles` instruction\n"
         ret += "\n"
         ret += "This instruction allows you to set who is allowed to change the auto translation settings for your " \
                "channels\n"
