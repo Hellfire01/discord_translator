@@ -12,7 +12,7 @@ class Logger:
         file_handler.setFormatter(formatter)
         self.__logger.addHandler(file_handler)
         # prepare the stream handler ( competes with the other logs of the other used libs )
-        stream_handler = logging.FileHandler(self.__output_file)
+        stream_handler = logging.StreamHandler(self.__output_file)
         stream_handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
         stream_handler.setFormatter(formatter)
