@@ -17,6 +17,8 @@ class Set(InstructionParent):
         for role in message.role_mentions:
             if role not in roles:
                 roles.append(role)
+        if len(roles) is 0:
+            return "you need to ping the roles in order to allow me to identify them, I could not find any pinged roles in the instruction"
         self.database_access.set_trusted_roles(message.guild.id, roles)
         ret = "set the following roles to be able to edit the auto translation settings :\n"
         role_names = []

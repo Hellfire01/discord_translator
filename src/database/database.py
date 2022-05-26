@@ -1,6 +1,6 @@
 from src.database.models.channel_model import ChannelModel
-from src.database.models.trusted_role import TrustedRoleModel
-from src.database.models.discord_guild import DiscordGuildModel
+from src.database.models.trusted_role_model import TrustedRoleModel
+from src.database.models.discord_guild_model import DiscordGuildModel
 from src.database.database_commons import Base, Engine
 
 
@@ -32,26 +32,24 @@ class Database:
 
     # === roles ===
 
-    def get_trusted_role(self, session, discord_guild_id):
-        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=discord_guild_id).first()
+    def get_trusted_role(self, session, trusted_role_id):
+        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=trusted_role_id).first()
         return instance
 
     def get_trusted_roles_discord(self, session, discord_guild_id):
-        instance = session.query(TrustedRoleModel).filter_by(role_discord_id=discord_guild_id).all()
+        instance = session.query(TrustedRoleModel).filter_by(discord_guild_id=discord_guild_id).all()
         return instance
 
     def get_or_create_trusted_role(self, session, discord_guild_id, trusted_role_id, trusted_role_name):
         trusted_role = self.get_trusted_role(session, trusted_role_id)
         if trusted_role is None:
             discord_guild = self.get_or_create_discord_guild(session, discord_guild_id)
+            print(trusted_role_id)
             trusted_role = TrustedRoleModel(role_discord_id=trusted_role_id, discord_guild=discord_guild, role_name=trusted_role_name)
             session.add(trusted_role)
 
     def remove_one_trusted_role(self, session, trusted_role_id):
         session.query(TrustedRoleModel).filter_by(role_discord_id=trusted_role_id).delete()
-
-    def remove_all_trusted_roles(self, session, discord_guild_id):
-        session.query(TrustedRoleModel).filter_by(discord_guild_id=discord_guild_id).delete()
 
     # === discord guild ===
     # note :
