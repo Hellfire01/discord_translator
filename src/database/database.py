@@ -1,4 +1,6 @@
 from src.database.models.channel_model import ChannelModel
+from src.database.models.trusted_role import TrustedRoleModel
+from src.database.models.discord_guild import DiscordGuildModel
 from src.database.database_commons import Base, Engine
 
 
