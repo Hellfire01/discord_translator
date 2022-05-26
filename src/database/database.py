@@ -55,7 +55,7 @@ class Database:
     # === discord guild ===
     # note :
     # this section has no removal yet
-    # removal would need a check that there are no longer any attached allowed roles
+    # removal would require a check that there are no longer any attached allowed roles
 
     def get_discord_guild(self, session, discord_guild_id):
         instance = session.query(DiscordGuildModel).filter_by(guild_discord_id=discord_guild_id).first()

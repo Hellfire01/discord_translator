@@ -1,3 +1,4 @@
+from src.instructions.instruction_implementation.comon.get_permission import GetPermission
 from src.instructions.instruction_inheritance import InstructionParent
 
 
@@ -8,7 +9,7 @@ class Get(InstructionParent):
         super(Get, self).__init__("Trusted roles get")
 
     def run(self, message):
-        return "trusted roles get todo"
+        return "todo"
 
     def get_description(self) -> str:
         return "trusted roles get description todo"

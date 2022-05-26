@@ -1,4 +1,5 @@
 import discord
+import traceback
 from src.instructions.instruction_implementation.generic_instructions.no_instruction import NoInstruction
 
 
@@ -23,7 +24,7 @@ class DiscordApi(discord.Client):
             if ret != "":
                 await message.channel.send(ret)
         except Exception as e:
-            self.core.logger.error("got uncaught exception of type : " + str(type(e)) + "\n message is :\n" + str(e))
+            self.core.logger.error("got uncaught exception of type : " + str(type(e)) + "\nmessage is :\n" + str(e) + "\n path is :\n" + str(traceback.format_exc()))
 
     async def on_message_edit(self, before, after):
         pass
