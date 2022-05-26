@@ -11,7 +11,6 @@ from src.instructions.instruction_implementation.trusted_roles.sub_instructions.
 from src.instructions.instruction_implementation.instruction_list import InstructionList
 
 
-
 class TrustedRoles(InstructionParent):
     def __init__(self, commandline_config, database_access):
         self.commandline_config = commandline_config

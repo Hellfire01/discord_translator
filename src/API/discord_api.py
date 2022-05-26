@@ -4,7 +4,7 @@ from src.instructions.instruction_implementation.generic_instructions.no_instruc
 
 class DiscordApi(discord.Client):
     async def on_ready(self):
-        print("bot is ready")
+        self.core.logger.info("bot is ready")
 
     async def on_message(self, message):
         if message.author == self.user:
