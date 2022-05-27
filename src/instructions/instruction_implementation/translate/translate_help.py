@@ -11,13 +11,9 @@ class TranslateHelp(InstructionParent):
         ret = "This is the `translate` option\n"
         ret += "The translation is made using google translate\n"
         ret += "The option is used for a direct translation between a given text and the expected output\n"
-        ret += "To use it, use the flag emotes, names or acronyms. The available flag emotes can be list with the `" + \
+        ret += "To use it, use the flag emotes, names or acronyms. The available flag emotes can be listed with the `" + \
                self.commandline_config.first_keyword + " lang-list` instruction\n"
         ret += "The first flag is for the input languages, the following ones are the output languages\n"
-        ret += "\n"
-        ret += "Usage example :\n"
-        ret += "**" + self.commandline_config.first_keyword + " translate :flag_fr: " + self.translate_config.splitter + " :flag_us: :flag_de:**\n"
-        ret += "This will attempt to take in french and translate it automatically to english and german\n"
         ret += "\n"
         ret += "Usage example :\n"
         ret += "**" + self.commandline_config.first_keyword + " translate en " + self.translate_config.splitter + " french**\n"

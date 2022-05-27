@@ -8,13 +8,19 @@ class Help(InstructionParent):
 
     def run(self, message=None) -> str:
         ret = "Hello :wave:\n"
-        ret += "I am a translator, I get the messages that are given to me and send them to google translate\n"
-        ret += "I can manage multiple different languages as output\n"
-        ret += "My goal is to help people of different communities and languages communicate with each other\n"
+        ret += "I am a translator, I automate the usage of google translate in order to allow different " \
+               "communities to easily interact with one another\n"
+        ret += "I can manage multiple different languages as input and output\n"
         ret += "\n"
         ret += "Here is how to use me :\n"
         ret += "\n"
-        ret += "you can get the list of instruction_implementation by writing `" + self.keyword + " -l`"
+        ret += "I can be set to translate a text channel automatically in the desired languages by using the " \
+               "`auto-translation` instruction\n"
+        ret += "By default, only the  server owner can use this instruction, in order to add roles that are " \
+               "allowed to setup / change / remove the auto translated channels, you can use the `trusted-roles`" \
+               " instruction ( server owner only )\n"
+        ret += "\n"
+        ret += "you can get the complete list of instructions I understand by writing : `" + self.keyword + " list`\n"
         return ret
 
     def get_description(self):
