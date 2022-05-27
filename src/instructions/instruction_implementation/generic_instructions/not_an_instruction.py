@@ -16,5 +16,6 @@ class NotAnInstruction(InstructionParent):
         if self.extra_message != "":
             ret += self.extra_message + "\n"
         else:
-            ret += "use `" + self.commandline_config.first_keyword + " --help`"
+            ret += "use `" + self.commandline_config.first_keyword + " help` for help or " \
+                   "`" + self.commandline_config.first_keyword + " list` to see all of the instructions I understand"
         return ret

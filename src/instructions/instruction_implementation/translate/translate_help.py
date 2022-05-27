@@ -16,11 +16,11 @@ class TranslateHelp(InstructionParent):
         ret += "The first flag is for the input languages, the following ones are the output languages\n"
         ret += "\n"
         ret += "Usage example :\n"
-        ret += "**" + self.commandline_config.first_keyword + " translate en " + self.translate_config.splitter + " french**\n"
+        ret += "**" + self.commandline_config.first_keyword + " translate en " + self.translate_config.separator + " french**\n"
         ret += "This will attempt to take in english and translate it automatically to french\n"
         ret += "\n"
         ret += "Usage example :\n"
-        ret += "**" + self.commandline_config.first_keyword + " translate " + self.translate_config.splitter + " it**\n"
+        ret += "**" + self.commandline_config.first_keyword + " translate " + self.translate_config.separator + " it**\n"
         ret += "The translator will attempt to guess the input language and output it to italian\n"
         ret += "This may have mixed results if the input language is not correctly guessed though\n"
         return ret
