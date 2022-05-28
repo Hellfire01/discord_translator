@@ -43,6 +43,6 @@ class Set(InstructionParent):
     def get_description(self) -> str:
         ret = "The set instruction tells the translator that you would like the current channel to be auto translated\n"
         ret += "In order to use it, give one or more languages as parameter\n"
-        ret += "Example : `!ot auto-translate set fr en` sets the current channel to auto translate all messages to" \
+        ret += "Example : `!ot auto-translation set fr en` sets the current channel to auto translate all messages to" \
                "french and english"
         return ret
