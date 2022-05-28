@@ -5,7 +5,7 @@ from src.core_module.config.command_line_config import CommandLineConfig
 from src.core_module.config.database_config import DatabaseConfig
 from src.core_module.config.discord_config import DiscordConfig
 from src.core_module.config.translate_config import TranslateConfig
-from src.core_module.config.api_config import ApiConfig
+from src.core_module.config.google_api_config import GoogleApiConfig
 from src.database.database_interface import DatabaseInterface
 from src.utils.get_discord_token import GetDiscordToken
 from src.logger.logger import Logger
@@ -28,9 +28,9 @@ def get_core() -> Core:
     logger = Logger('log.txt')
     database_config = DatabaseConfig('database.db')
     database_access = DatabaseInterface(database_config, logger)
-    api_config = ApiConfig(google_api_sleep=1)
-    gtapi = GoogleTranslateApi(api_config)
-    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, api_config, gtapi)
+    google_api_config = GoogleApiConfig(api_sleep=1, max_message_len=2000, max_len_error_message="I apologise, I cannot translate more than 2000 characters at once")
+    gtapi = GoogleTranslateApi(google_api_config)
+    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, google_api_config, gtapi)
     return ret
 
 
