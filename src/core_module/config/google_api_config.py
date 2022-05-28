@@ -7,11 +7,11 @@ class GoogleApiConfig:
         self.__max_len_error_message = max_len_error_message
 
     @property
-    def google_api_sleep(self):
+    def api_sleep(self):
         return self.__api_sleep
 
     @property
-    def google_translate_max_message_len(self):
+    def max_message_len(self):
         return self.__max_message_len
 
     @property
