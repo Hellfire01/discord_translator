@@ -19,6 +19,9 @@ from src.instructions.instruction_implementation.instruction_list import Instruc
 from src.instructions.instruction_implementation.list_languages import ListLanguages
 from src.instructions.instruction_implementation.auto_translation.automated.automated_translation_exec import AutomatedTranslationExec
 from src.instructions.instruction_implementation.trusted_roles.trusted_roles import TrustedRoles
+from src.security.security_filters import SecurityFilter
+from src.security.filters.no_urls_filter import NoUrlsFilter
+from src.security.filters.no_tags_filter import NoTagsFilter
 
 
 def get_core() -> Core:
@@ -30,7 +33,8 @@ def get_core() -> Core:
     database_access = DatabaseInterface(database_config, logger)
     google_api_config = GoogleApiConfig(api_sleep=1, max_message_len=2000, max_len_error_message="I apologise, I cannot translate more than 2000 characters at once")
     gtapi = GoogleTranslateApi(google_api_config)
-    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, google_api_config, gtapi)
+    security_filters = get_security_filters()
+    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, google_api_config, gtapi, security_filters)
     return ret
 
 
@@ -49,6 +53,13 @@ def get_instructions(core):
 def get_list_of_automated_instructions(core):
     ret = []
     ret.append(AutomatedTranslationExec(core.logger, core.database_access, core.commandline_config, core.google_translate_api))
+    return ret
+
+
+def get_security_filters():
+    ret = SecurityFilter()
+    ret.add_filter(NoUrlsFilter())
+    ret.add_filter(NoTagsFilter())
     return ret
 
 

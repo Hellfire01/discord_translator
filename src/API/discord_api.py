@@ -1,6 +1,7 @@
 import discord
 import traceback
 from src.instructions.instruction_implementation.generic_instructions.no_instruction import NoInstruction
+from src.security.filter_exception import FilterException
 
 
 class DiscordApi(discord.Client):
@@ -12,6 +13,7 @@ class DiscordApi(discord.Client):
             if message.author == self.user:
                 return  # ignore the bot itself to prevent feedback loop
             ret = ""
+            self.core.security_config.filters.filter(message)
             if str(self.user.id) in message.content:
                 instruction = self.instructions_extractor.help_instruction
             else:
@@ -23,6 +25,8 @@ class DiscordApi(discord.Client):
                 ret += instruction.run(message)
             if ret != "":
                 await message.channel.send(ret)
+        except FilterException as e:
+            await message.channel.send(str(e))
         except Exception as e:
             self.core.logger.error("got uncaught exception of type : " + str(type(e)) + "\nmessage is :\n" + str(e) + "\n path is :\n" + str(traceback.format_exc()))
 
