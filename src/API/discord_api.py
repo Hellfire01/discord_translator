@@ -13,7 +13,7 @@ class DiscordApi(discord.Client):
             if message.author == self.user:
                 return  # ignore the bot itself to prevent feedback loop
             ret = ""
-            self.core.security_config.filters.filter(message)
+            self.core.security_config.filter(message)
             if str(self.user.id) in message.content:
                 instruction = self.instructions_extractor.help_instruction
             else:

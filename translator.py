@@ -33,8 +33,8 @@ def get_core() -> Core:
     database_access = DatabaseInterface(database_config, logger)
     google_api_config = GoogleApiConfig(api_sleep=1, max_message_len=2000, max_len_error_message="I apologise, I cannot translate more than 2000 characters at once")
     gtapi = GoogleTranslateApi(google_api_config)
-    security_filters = get_security_filters()
-    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, google_api_config, gtapi, security_filters)
+    security_filter = get_security_filter()
+    ret = Core(commandline_config, database_config, discord_config, translate_config, logger, database_access, google_api_config, gtapi, security_filter)
     return ret
 
 
@@ -56,11 +56,11 @@ def get_list_of_automated_instructions(core):
     return ret
 
 
-def get_security_filters():
-    ret = SecurityFilter()
-    ret.add_filter(NoUrlsFilter())
-    ret.add_filter(NoTagsFilter())
-    return ret
+def get_security_filter():
+    security_filter = SecurityFilter()
+    security_filter.add_filter(NoUrlsFilter())
+    security_filter.add_filter(NoTagsFilter())
+    return security_filter
 
 
 core_instance = get_core()
