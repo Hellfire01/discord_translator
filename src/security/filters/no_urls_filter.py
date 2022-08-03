@@ -10,7 +10,7 @@ class NoUrlsFilter(FilterParent):
     def __has_url(self, string):
         regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
         url = re.findall(regex, string)
-        return len(url) == 0
+        return len(url) != 0
 
     def filter(self, message):
         if self.__has_url(message.content):

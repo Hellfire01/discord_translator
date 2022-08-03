@@ -26,6 +26,7 @@ class DiscordApi(discord.Client):
             if ret != "":
                 await message.channel.send(ret)
         except FilterException as e:
+            self.core.logger.warning("got a filter exception, content is : \n" + str(e))
             await message.channel.send(str(e))
         except Exception as e:
             self.core.logger.error("got uncaught exception of type : " + str(type(e)) + "\nmessage is :\n" + str(e) + "\n path is :\n" + str(traceback.format_exc()))
